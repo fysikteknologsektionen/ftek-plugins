@@ -1,0 +1,11 @@
+.collapsible {
+    cursor: pointer;
+}
+
+.collapsible.expanded:after {
+    content: " ▾";
+}
+
+.collapsible:after {
+    content: " ▸";
+}
