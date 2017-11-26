@@ -22,15 +22,13 @@ function chcw_get_balance($cardNumber) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT ,0); 
+    curl_setopt($ch, CURLOPT_TIMEOUT, 2); //timeout in seconds
     curl_setopt($ch, CURLOPT_URL, "https://ftek.se/api/card-balance/v1/" . $cardNumber);
     $result = curl_exec($ch);
     curl_close($ch);
     $cardObject = json_decode($result);
-    if (!property_exists($error, $cardObject)) {
-        return $cardObject;
-    } else {
-        return false;
-    }
+    return $cardObject;
 }
 
 // Register and load the widget
@@ -62,7 +60,7 @@ class ChalmersCardWidget extends WP_Widget {
         $cardNumber = get_user_meta(get_current_user_id(), 'chalmers-card', true);
         if ($cardNumber != "") {
             $cardObject = chcw_get_balance($cardNumber);
-            if ($cardObject) {
+            if (!property_exists($error, $cardObject)) {
                 $title = apply_filters( 'widget_title', $instance['title'] );
 
                 // before and after widget arguments are defined by themes
