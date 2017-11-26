@@ -1,0 +1,18 @@
+msgid ""
+msgstr ""
+
+#: ../chalmers-card-widget.php:47
+msgid "Chalmers Card Widget"
+msgstr "Kårkortswidget"
+
+#: ../chalmers-card-widget.php:50
+msgid "Shows card balance for Chalmers Student Union Card."
+msgstr "Visar kårkortssaldo."
+
+#: ../chalmers-card-widget.php:71
+msgid "SEK"
+msgstr "kr"
+
+#: ../chalmers-card-widget.php:85
+msgid "Card Balance"
+msgstr "Kårkortsaldo"
