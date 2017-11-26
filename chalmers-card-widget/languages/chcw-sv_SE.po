@@ -1,12 +1,17 @@
 msgid ""
 msgstr ""
 
+# General
+msgid "Student Union Card"
+msgstr "Kårkort"
+
+
 #: ../chalmers-card-widget.php:47
 msgid "Chalmers Card Widget"
 msgstr "Kårkortswidget"
 
 #: ../chalmers-card-widget.php:50
-msgid "Shows card balance for Chalmers Student Union Card."
+msgid "Shows account balance for Chalmers Student Union Cards."
 msgstr "Visar kårkortssaldo."
 
 #: ../chalmers-card-widget.php:71
@@ -16,3 +21,11 @@ msgstr "kr"
 #: ../chalmers-card-widget.php:85
 msgid "Card Balance"
 msgstr "Kårkortsaldo"
+
+#: ../chalmers-card-widget.php:126
+msgid "You can find your 16 digit number on your Student Union Card."
+msgstr "Du kan hitta ditt 16-siffriga nummer på ditt kårkort."
+
+#: ../chalmers-card-widget.php:130
+msgid "Write the whole number on your Student Union Card. This needs to be updated when you get a new one."
+msgstr "Skriv in hela numret för ditt kårkort. Detta måste uppdateras när du får ett nytt."

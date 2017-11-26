@@ -1,14 +1,14 @@
 <?php
 /*
    Plugin Name: Chalmers Card Widget
-   Description: A widget showing today's lunch at Chalmers University
+   Description: Shows account balance for Chalmers Student Union Cards.
    Author: Johan Winther (johwin)
    Text Domain: chcw
    Domain Path: /languages
  */
 
 /*
-  For fetching card account balance. Uses the api at https://chcw.se/api/card-balance/v1/
+  For fetching card account balance. Uses the api at https://ftek.se/api/card-balance/v1/
 */
 
 add_action( 'init', 'init_chcw' );
@@ -19,13 +19,18 @@ function init_chcw() {
 
 function chcw_get_balance($cardNumber) {
     // Fetch and decode JSON file
-    $cardObject = json_decode(file_get_contents("/api/v1/$cardNumber"));
-    if (property_exists($error, $cardObject)) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_URL, "https://ftek.se/api/card-balance/v1/" . $cardNumber);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    $cardObject = json_decode($result);
+    if (!property_exists($error, $cardObject)) {
         return $cardObject;
     } else {
         return false;
     }
-
 }
 
 // Register and load the widget
@@ -47,7 +52,7 @@ class ChalmersCardWidget extends WP_Widget {
 			__('Chalmers Card Widget', 'chcw'),
 
 			// Widget description
-			array( 'description' => __( 'Shows card balance for Chalmers Student Union Card.', 'chcw' ), )
+			array( 'description' => __( 'Shows account balance for Chalmers Student Union Cards.', 'chcw' ), )
 		);
 	}
 
@@ -115,7 +120,7 @@ function user_meta_show_form_field_chalmers_card( $user ) { ?>
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="chalmers_card">Kårkort</label>
+				<label for="chalmers_card"><?php __("Student Union Card",'chcw') ?></label>
 			</th>
 			<td>
 				<input type="number"
@@ -123,11 +128,11 @@ function user_meta_show_form_field_chalmers_card( $user ) { ?>
 				id="chalmers-card"
 				name="chalmers-card"
 				value="<?= esc_attr(get_user_meta($user->ID, 'chalmers-card', true)); ?>"
-				title="You can find your 16 digit number on your Student Union Card."
+				title=<?php __("You can find your 16 digit number on your Student Union Card.", 'chcw') ?>
 				pattern="\d{16}"
 				required>
 				<p class="description">
-					Skriv in hela numret för ditt kårkort. Detta måste uppdateras när du får ett nytt.
+					<?php __("Write the whole number on your Student Union Card. This needs to be updated when you get a new one.",'chcw') ?>
 				</p>
 			</td>
 		</tr>
