@@ -19,13 +19,18 @@ function init_chcw() {
 
 function chcw_get_balance($cardNumber) {
     // Fetch and decode JSON file
-    $cardObject = json_decode(file_get_contents("/api/v1/$cardNumber"));
-    if (property_exists($error, $cardObject)) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_URL, "https://ftek.se/api/card-balance/v1/" . $cardNumber);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    $cardObject = json_decode($result);
+    if (!property_exists($error, $cardObject)) {
         return $cardObject;
     } else {
         return false;
     }
-
 }
 
 // Register and load the widget
