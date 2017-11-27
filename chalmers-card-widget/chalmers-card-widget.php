@@ -59,7 +59,7 @@ class ChalmersCardWidget extends WP_Widget {
         $cardNumber = get_user_meta(get_current_user_id(), 'chalmers-card', true);
         if ($cardNumber != "") {
             $cardObject = chcw_get_balance($cardNumber);
-            if (!$cardObject && !property_exists($error, $cardObject)) {
+            if (!$cardObject && !isset($cardObject->error)) {
                 $title = apply_filters( 'widget_title', $instance['title'] );
 
                 // before and after widget arguments are defined by themes
