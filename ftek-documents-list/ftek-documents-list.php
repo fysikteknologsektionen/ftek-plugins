@@ -54,12 +54,12 @@ function ftek_documents_listing($path, $sorting_options = array()) {
     
     // js and css for collapsing document sections
     wp_enqueue_script( 'ftek_documents_collapse', 
-                        plugins_url() . '/ftek_documents/collapse/collapse.js',
+                        plugins_url() . '/ftek-documents-list/collapse/collapse.js',
                         array( 'jquery' ),
                         false,
                         false);
     wp_enqueue_style( 'ftek_documents_collapse',
-                      plugins_url() . '/ftek_documents/collapse/collapse.css');
+                      plugins_url() . '/ftek-documents-list/collapse/collapse.css');
     
     $upload_dir = wp_upload_dir();
     $basepath = trailingslashit($upload_dir['basedir']) . $path;
