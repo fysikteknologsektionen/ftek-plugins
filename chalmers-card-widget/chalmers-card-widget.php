@@ -112,7 +112,6 @@ class ChalmersCardWidget extends WP_Widget {
 * Profile field for Student Union card
 */
 add_action( 'show_user_profile', 'user_meta_show_form_field_chalmers_card' );
-add_action( 'edit_user_profile', 'user_meta_show_form_field_chalmers_card' );
 
 function user_meta_show_form_field_chalmers_card( $user ) { ?>
 
@@ -141,7 +140,6 @@ function user_meta_show_form_field_chalmers_card( $user ) { ?>
 <?php }
 
 add_action( 'personal_options_update', 'user_meta_update_form_field_chalmers_card' );
-add_action( 'edit_user_profile_update', 'user_meta_update_form_field_chalmers_card' );
 
 /**
 * The save action.
