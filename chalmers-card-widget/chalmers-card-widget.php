@@ -121,21 +121,21 @@ function user_meta_show_form_field_chalmers_card( $user ) { ?>
 	<table class="form-table">
 		<tr>
 			<th>
-				<label for="chalmers_card"><?php __("Student Union Card",'chcw') ?></label>
-			</th>
-			<td>
-				<input type="number"
-				class="regular-text ltr"
-				id="chalmers-card"
-				name="chalmers-card"
-				value="<?= esc_attr(get_user_meta($user->ID, 'chalmers-card', true)); ?>"
-				title=<?php __("You can find your 16 digit number on your Student Union Card.", 'chcw') ?>
-				pattern="\d{16}"
-				required>
-				<p class="description">
-					<?php __("Write the whole number on your Student Union Card. This needs to be updated when you get a new one.",'chcw') ?>
-				</p>
-			</td>
+                <label for="chalmers_card"><?= __('Student Union Card' , 'chcw') ?></label>
+            </th>
+            <td>
+                <input type="number"
+                class="regular-text ltr"
+                id="chalmers-card"
+                name="chalmers-card"
+                value="<?= esc_attr(get_user_meta($user->ID, 'chalmers-card' , true)); ?>"
+                title="<?= __("You can find your 16 digit number on your Student Union Card.", 'chcw') ?>"
+                pattern="\d{16}"
+                required>
+                <p class="description">
+                    <?= __("Write the whole number on your Student Union Card. This needs to be updated when you get a new one.",'chcw') ?>
+                </p>
+            </td>
 		</tr>
 	</table>
 <?php }
