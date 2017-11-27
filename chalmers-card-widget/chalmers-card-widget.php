@@ -151,7 +151,7 @@ add_action( 'personal_options_update', 'user_meta_update_form_field_chalmers_car
 function user_meta_update_form_field_chalmers_card( $user_id ) {
 
 	// check that the current user have the capability to edit the $user_id
-	if (!current_user_can('edit_user', $user_id)) {
+	if (!current_user_can('edit_user', $user_id) || !preg_match('/\d{16}/', $_POST['chalmers-card'])) {
 		return false;
 	}
 
