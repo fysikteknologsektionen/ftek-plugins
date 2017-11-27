@@ -73,7 +73,7 @@ class ChalmersCardWidget extends WP_Widget {
             if (!$cardObject) {
                 echo 'Could not connect to card server.';
             } else if (isset($cardObject->error)) {
-                echo error;
+                echo $cardObject->error;
             } else {
                 echo '<span id="name">' . $cardObject->cardHolder . '</span><br>';
                 echo '<span id="balance">' . number_format_i18n($cardObject->cardBalance->value, 2). ' ' . __('SEK', 'chcw') . '</span>';
