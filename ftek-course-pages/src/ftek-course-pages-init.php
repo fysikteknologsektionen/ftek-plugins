@@ -3,7 +3,7 @@
 add_action( 'init', 'init_ftek_course_pages' );
 function init_ftek_course_pages() {
     // Load translations
-    load_plugin_textdomain('ftekcp', false, 'ftek_course_pages/languages/' );
+    load_plugin_textdomain('ftekcp', false, 'ftek-course-pages/languages/' );
     
     // Add new post type
     $labels = array(
