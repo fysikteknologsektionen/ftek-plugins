@@ -16,12 +16,9 @@ function init_chcw() {
     // Load translations
     load_plugin_textdomain('chcw', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
-    /*if( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
-        require_once( basename( dirname( __FILE__ )) . '/vendor/autoload.php');
-
-        use Defuse\Crypto\Key;
-        use Defuse\Crypto\Crypto;
-    }*/
+    if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
+        require_once( 'vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
+    }
 }
 
 function chcw_get_balance($cardNumber) {
@@ -63,9 +60,9 @@ class ChalmersCardWidget extends WP_Widget {
     // Creating widget front-end
 
     public function widget( $args, $instance ) {
-        //$key = Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
-        //$cardNumber = Crypto::decrypt(get_user_meta(get_current_user_id(), 'chalmers-card', true), $key );
-        $cardNumber = get_user_meta(get_current_user_id(), 'chalmers-card', true));
+        $key = Defuse\Crypto\Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
+        $cardNumber = Defuse\Crypto\Crypto::decrypt(get_user_meta(get_current_user_id(), 'chalmers-card', true), $key );
+        //$cardNumber = get_user_meta(get_current_user_id(), 'chalmers-card', true));
         if ($cardNumber != "") {
             $cardObject = chcw_get_balance($cardNumber);
 
@@ -107,7 +104,7 @@ add_action( 'show_user_profile', 'user_meta_show_form_field_chalmers_card' );
 
 function user_meta_show_form_field_chalmers_card( $user ) {
 
-    //$key = Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
+    $key = Defuse\Crypto\Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
 
     ?>
 
@@ -123,7 +120,7 @@ function user_meta_show_form_field_chalmers_card( $user ) {
                 class="regular-text ltr"
                 id="chalmers-card"
                 name="chalmers-card"
-                value="<?= esc_attr(get_user_meta($user->ID, 'chalmers-card' , true)); ?>"
+                value="<?= esc_attr(Defuse\Crypto\Crypto::decrypt(get_user_meta($user->ID, 'chalmers-card' , true)), $key); ?>"
                 title="<?= __("You can find your 16 digit number on your Student Union Card.", 'chcw') ?>"
                 pattern="\d{16}"
                 required>
@@ -152,9 +149,9 @@ function user_meta_update_form_field_chalmers_card( $user_id ) {
     }
 
     // create/update user meta for the $user_id but encrypt it first
-    //$key = Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
-    //$cardNumberEncrypted = Crypto::encrypt($_POST['chalmers-card'], $key);
-    $cardNumberEncrypted = $_POST['chalmers-card'];
+    $key = Defuse\Crypto\Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
+    $cardNumberEncrypted = Defuse\Crypto\Crypto::encrypt($_POST['chalmers-card'], $key);
+    //$cardNumberEncrypted = $_POST['chalmers-card'];
     return update_user_meta(
         $user_id,
         'chalmers-card',
