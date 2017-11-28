@@ -108,7 +108,11 @@ add_action( 'show_user_profile', 'user_meta_show_form_field_chalmers_card' );
 function user_meta_show_form_field_chalmers_card( $user ) {
 
     $key = Defuse\Crypto\Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
-
+    $cardNumber = "";
+    $cardNumberEncrypted = get_user_meta($user->ID, 'chalmers-card' , true));
+    if ($cardNumberEncrypted != "") {
+        $cardNumber = Defuse\Crypto\Crypto::decrypt($cardNumberEncrypted, $key);
+    }
     ?>
 
     <h3>Chalmers</h3>
@@ -123,7 +127,7 @@ function user_meta_show_form_field_chalmers_card( $user ) {
                 class="regular-text ltr"
                 id="chalmers-card"
                 name="chalmers-card"
-                value="<?= esc_attr(Defuse\Crypto\Crypto::decrypt(get_user_meta($user->ID, 'chalmers-card' , true)), $key); ?>"
+                value="<?= esc_attr($cardNumberEncrypted); ?>"
                 title="<?= __("You can find your 16 digit number on your Student Union Card.", 'chcw') ?>"
                 pattern="\d{16}"
                 required>
