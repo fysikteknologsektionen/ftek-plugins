@@ -109,7 +109,7 @@ function user_meta_show_form_field_chalmers_card( $user ) {
 
     $key = Defuse\Crypto\Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
     $cardNumber = "";
-    $cardNumberEncrypted = get_user_meta($user->ID, 'chalmers-card' , true));
+    $cardNumberEncrypted = get_user_meta($user->ID, 'chalmers-card' , true);
     if ($cardNumberEncrypted != "") {
         $cardNumber = Defuse\Crypto\Crypto::decrypt($cardNumberEncrypted, $key);
     }
