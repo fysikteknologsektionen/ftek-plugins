@@ -127,7 +127,7 @@ function user_meta_show_form_field_chalmers_card( $user ) {
                 class="regular-text ltr"
                 id="chalmers-card"
                 name="chalmers-card"
-                value="<?= esc_attr($cardNumberEncrypted); ?>"
+                value="<?= esc_attr($cardNumber); ?>"
                 title="<?= __("You can find your 16 digit number on your Student Union Card.", 'chcw') ?>"
                 pattern="\d{16}"
                 required>
@@ -157,11 +157,16 @@ function user_meta_update_form_field_chalmers_card( $user_id ) {
 
     // create/update user meta for the $user_id but encrypt it first
     $key = Defuse\Crypto\Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
-    $cardNumberEncrypted = Defuse\Crypto\Crypto::encrypt($_POST['chalmers-card'], $key);
-    //$cardNumberEncrypted = $_POST['chalmers-card'];
+    if ($_POST['chalmers-card'] == "") {
+      $cardNumberEncrypted = "";
+    } else {
+      $cardNumberEncrypted = Defuse\Crypto\Crypto::encrypt($_POST['chalmers-card'], $key);
+    }
+
     return update_user_meta(
         $user_id,
         'chalmers-card',
         $cardNumberEncrypted
     );
+
 }
