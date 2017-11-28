@@ -61,8 +61,11 @@ class ChalmersCardWidget extends WP_Widget {
 
     public function widget( $args, $instance ) {
         $key = Defuse\Crypto\Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
-        $cardNumber = Defuse\Crypto\Crypto::decrypt(get_user_meta(get_current_user_id(), 'chalmers-card', true), $key );
-        //$cardNumber = get_user_meta(get_current_user_id(), 'chalmers-card', true));
+        $cardNumber = "";
+        $cardNumberEncrypted = get_user_meta(get_current_user_id(), 'chalmers-card', true);
+        if ($cardNumberEncrypted != "")
+            $cardNumber = Defuse\Crypto\Crypto::decrypt($cardNumberEncrypted, $key );
+        
         if ($cardNumber != "") {
             $cardObject = chcw_get_balance($cardNumber);
 
