@@ -23,7 +23,7 @@ function ftek_course_table_shortcode($atts, $content, $tag)
         return;
     }
     
-    $script_url = plugins_url() . '/ftek_course_pages/js/';
+    $script_url = plugins_url() . '/ftek-course-pages/js/';
 	wp_enqueue_script( 'datatables', 
                         $script_url . 'jquery.dataTables.min.js', 
                         array('jquery'), 
