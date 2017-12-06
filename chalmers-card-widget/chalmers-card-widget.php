@@ -15,10 +15,6 @@ add_action( 'init', 'init_chcw' );
 function init_chcw() {
     // Load translations
     load_plugin_textdomain('chcw', false, basename( dirname( __FILE__ ) ) . '/languages' );
-
-    if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
-        require_once( 'vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
-    }
 }
 
 function chcw_get_balance($cardNumber) {
@@ -98,75 +94,3 @@ class ChalmersCardWidget extends WP_Widget {
 
     }
 } // Class chalmers_card_widget ends here
-
-
-/*
-* Profile field for Student Union card
-*/
-add_action( 'show_user_profile', 'user_meta_show_form_field_chalmers_card' );
-
-function user_meta_show_form_field_chalmers_card( $user ) {
-
-    $key = Defuse\Crypto\Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
-    $cardNumber = "";
-    $cardNumberEncrypted = get_user_meta($user->ID, 'chalmers-card' , true);
-    if ($cardNumberEncrypted != "") {
-        $cardNumber = Defuse\Crypto\Crypto::decrypt($cardNumberEncrypted, $key);
-    }
-    ?>
-
-    <h3>Chalmers</h3>
-
-    <table class="form-table">
-        <tr>
-            <th>
-                <label for="chalmers_card"><?= __('Student Union Card' , 'chcw') ?></label>
-            </th>
-            <td>
-                <input type="number"
-                class="regular-text ltr"
-                id="chalmers-card"
-                name="chalmers-card"
-                value="<?= esc_attr($cardNumber); ?>"
-                title="<?= __("You can find your 16 digit number on your Student Union Card.", 'chcw') ?>"
-                pattern="\d{16}"
-                required>
-                <p class="description">
-                    <?= __("Write the whole number on your Student Union Card. This needs to be updated when you get a new one.",'chcw') ?>
-                </p>
-            </td>
-        </tr>
-    </table>
-<?php }
-
-add_action( 'personal_options_update', 'user_meta_update_form_field_chalmers_card' );
-
-/**
-* The save action.
-*
-* @param $user_id int the ID of the current user.
-*
-* @return bool Meta ID if the key didn't exist, true on successful update, false on failure.
-*/
-function user_meta_update_form_field_chalmers_card( $user_id ) {
-
-    // check that the current user have the capability to edit the $user_id
-    if (!current_user_can('edit_user', $user_id) || ($_POST['chalmers-card'] != "" && !preg_match('/\d{16}/', $_POST['chalmers-card']))) {
-        return false;
-    }
-
-    // create/update user meta for the $user_id but encrypt it first
-    $key = Defuse\Crypto\Key::loadFromAsciiSafeString( CHALMERS_ENCRYPT_KEY );
-    if ($_POST['chalmers-card'] == "") {
-      $cardNumberEncrypted = "";
-    } else {
-      $cardNumberEncrypted = Defuse\Crypto\Crypto::encrypt($_POST['chalmers-card'], $key);
-    }
-
-    return update_user_meta(
-        $user_id,
-        'chalmers-card',
-        $cardNumberEncrypted
-    );
-
-}
