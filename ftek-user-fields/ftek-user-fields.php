@@ -25,16 +25,17 @@ function init_ftek_uf() {
 /*
 * Profile field for personal identification number
 */
-$is_active = false;
+
+add_action( 'show_user_profile', 'user_meta_show_form_field_personal_id_number' );
+add_action( 'edit_user_profile', 'user_meta_show_form_field_personal_id_number' ); // Show personal ID for administrators
+
+function user_meta_show_form_field_personal_id_number( $user ) {
+    $is_active = false;
 require_once( ABSPATH . 'wp-includes/pluggable.php' );
 if ( $group = Groups_Group::read_by_name( 'Sektionsaktiva' ) ) {
     $is_active = Groups_User_Group::read( get_current_user_id() , $group->group_id );
 }
 if ($is_active) {
-    add_action( 'show_user_profile', 'user_meta_show_form_field_personal_id_number' );
-    add_action( 'edit_user_profile', 'user_meta_show_form_field_personal_id_number' ); // Show personal ID for administrators
-}
-function user_meta_show_form_field_personal_id_number( $user ) {
     $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
     $personalNumber = "";
     $personalNumberEncrypted = get_user_meta($user->ID, 'personnummer' , true);
@@ -67,17 +68,10 @@ function user_meta_show_form_field_personal_id_number( $user ) {
         </tr>
     </table>
 <?php }
-
-
-$is_active = false;
-require_once( ABSPATH . 'wp-includes/pluggable.php' );
-if ( $group = Groups_Group::read_by_name( 'Sektionsaktiva' ) ) {
-    $is_active = Groups_User_Group::read( get_current_user_id() , $group->group_id );
 }
-if ($is_active) {
-    add_action( 'personal_options_update', 'user_meta_update_form_field_personal_id_number' );
-    add_action( 'edit_user_profile_update', 'user_meta_update_form_field_personal_id_number' );
-}
+
+add_action( 'personal_options_update', 'user_meta_update_form_field_personal_id_number' );
+add_action( 'edit_user_profile_update', 'user_meta_update_form_field_personal_id_number' );
 
 /**
 * The save action.
@@ -87,6 +81,12 @@ if ($is_active) {
 * @return bool Meta ID if the key didn't exist, true on successful update, false on failure.
 */
 function user_meta_update_form_field_personal_id_number( $user_id ) {
+    $is_active = false;
+require_once( ABSPATH . 'wp-includes/pluggable.php' );
+if ( $group = Groups_Group::read_by_name( 'Sektionsaktiva' ) ) {
+    $is_active = Groups_User_Group::read( get_current_user_id() , $group->group_id );
+}
+if ($is_active) {
     // check that the current user have the capability to edit the $user_id
     if (!current_user_can('edit_user', $user_id) || ($_POST['personnummer'] != "" && !preg_match('/[0-9]{2}((0[0-9])|(10|11|12))(([0-2][0-9])|(3[0-1]))-[0-9]{4}/', $_POST['personnummer']))) {
         return false;
@@ -103,6 +103,7 @@ function user_meta_update_form_field_personal_id_number( $user_id ) {
         'personnummer',
         $personalNumberEncrypted
     );
+}
 }
 
 /*
