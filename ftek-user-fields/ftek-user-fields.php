@@ -62,7 +62,7 @@ if ($is_active) {
                 pattern="[0-9]{2}((0[0-9])|(10|11|12))(([0-2][0-9])|(3[0-1]))-[0-9]{4}"
                 required>
                 <p class="description">
-                    <?= __("Write your personal ID number in the format YYMMDD-XXXX.",'ftek_uf') ?>
+                    <?= __("By submitting your personal ID number you accept that Fysikteknologsektionen will save it in an encrypted format. It will be used to give your relevant access to our premises.",'ftek_uf') ?>
                 </p>
             </td>
         </tr>
