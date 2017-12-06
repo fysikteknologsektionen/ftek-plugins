@@ -25,9 +25,15 @@ function init_ftek_uf() {
 /*
 * Profile field for personal identification number
 */
-add_action( 'show_user_profile', 'user_meta_show_form_field_personal_id_number' );
-add_action( 'edit_user_profile', 'user_meta_show_form_field_personal_id_number' ); // Show personal ID for administrators
-
+$is_active = false;
+require_once( ABSPATH . 'wp-includes/pluggable.php' );
+if ( $group = Groups_Group::read_by_name( 'Sektionsaktiva' ) ) {
+    $is_active = Groups_User_Group::read( get_current_user_id() , $group->group_id );
+}
+if ($is_active) {
+    add_action( 'show_user_profile', 'user_meta_show_form_field_personal_id_number' );
+    add_action( 'edit_user_profile', 'user_meta_show_form_field_personal_id_number' ); // Show personal ID for administrators
+}
 function user_meta_show_form_field_personal_id_number( $user ) {
     $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
     $personalNumber = "";
@@ -61,8 +67,17 @@ function user_meta_show_form_field_personal_id_number( $user ) {
         </tr>
     </table>
 <?php }
-add_action( 'personal_options_update', 'user_meta_update_form_field_personal_id_number' );
-add_action( 'edit_user_profile_update', 'user_meta_update_form_field_personal_id_number' );
+
+
+$is_active = false;
+require_once( ABSPATH . 'wp-includes/pluggable.php' );
+if ( $group = Groups_Group::read_by_name( 'Sektionsaktiva' ) ) {
+    $is_active = Groups_User_Group::read( get_current_user_id() , $group->group_id );
+}
+if ($is_active) {
+    add_action( 'personal_options_update', 'user_meta_update_form_field_personal_id_number' );
+    add_action( 'edit_user_profile_update', 'user_meta_update_form_field_personal_id_number' );
+}
 
 /**
 * The save action.
