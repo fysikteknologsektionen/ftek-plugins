@@ -1,1 +1,28 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-06 11:48+0000\n"
+"PO-Revision-Date: 2017-12-06 11:54+0000\n"
+"Last-Translator: \n"
+"Language-Team: Swedish (Sweden)\n"
+"Language: sv-SE\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Loco-Source-Locale: sv_SE\n"
+"X-Loco-Parser: loco_parse_po\n"
+"X-Generator: Loco - https://localise.biz/"
 
+msgid "Personal data"
+msgstr "Personuppgifter"
+
+msgid "Personal ID number"
+msgstr "Personnummer"
+
+msgid "Your personal ID number is 10 digits long."
+msgstr "Ditt personnummer består av 10 siffror."
+
+msgid "Write your personal ID number in the format YYMMDD-XXXX."
+msgstr "Skriv ditt personnummer i formatet YYMMDD-XXXX."
