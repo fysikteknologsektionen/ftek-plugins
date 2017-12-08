@@ -97,7 +97,7 @@ if ($is_active) {
       $personalNumberEncrypted = "";
     } else {
       preg_match('/[0-9]{2}((0[0-9])|(10|11|12))(([0-2][0-9])|(3[0-1]))-[0-9]{4}/', $_POST['personnummer'], $matches);
-      $personalNumberEncrypted = Defuse\Crypto\Crypto::encrypt($matches[1], $key);
+      $personalNumberEncrypted = Defuse\Crypto\Crypto::encrypt($matches[0], $key);
     }
     return update_user_meta(
         $user_id,
