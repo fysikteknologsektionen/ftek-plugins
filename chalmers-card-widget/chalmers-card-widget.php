@@ -64,23 +64,20 @@ class ChalmersCardWidget extends WP_Widget {
         
         if ($cardNumber != "") {
             $cardObject = chcw_get_balance($cardNumber);
-
-            // before and after widget arguments are defined by themes
-            echo $args['before_widget'];
-            echo $args['before_title'] . __( 'Card Balance', 'chcw' ) . $args['after_title'];
-
-            // This is where you run the code and display the output
-
+            
             // If connection timed out
-            if (!$cardObject) {
-                echo 'Could not connect to card server.';
-            } else if (isset($cardObject->error)) {
-                echo $cardObject->error;
-            } else {
+            if ($cardObject && !isset($cardObject->error)) {
+            
+                // before and after widget arguments are defined by themes
+                echo $args['before_widget'];
+                echo $args['before_title'] . __( 'Card Balance', 'chcw' ) . $args['after_title'];
+
+                // This is where you run the code and display the output
                 echo '<span id="name">' . $cardObject->cardHolder . '</span><br>';
                 echo '<span id="balance">' . number_format_i18n($cardObject->cardBalance->value, 2). ' ' . __('SEK', 'chcw') . '</span>';
+                
+                echo $args['after_widget'];
             }
-            echo $args['after_widget'];
         }
     }
 
