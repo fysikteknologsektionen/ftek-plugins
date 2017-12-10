@@ -21,7 +21,7 @@ function chcw_get_balance($cardNumber) {
     // Fetch and decode JSON file
     $url = "https://ftek.se/api/card-balance/v1/" . $cardNumber;
     $response = wp_remote_get( $url, array( 'timeout' => 2) );
-    if ( is_wp_error( $request ) ) {
+    if ( is_wp_error( $response ) ) {
         return false;
     }
     $result = $response['body'];
