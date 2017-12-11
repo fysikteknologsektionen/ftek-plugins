@@ -73,9 +73,9 @@ class ChalmersCardWidget extends WP_Widget {
                 echo $args['before_title'] . __( 'Card Balance', 'chcw' ) . $args['after_title'];
 
                 // This is where you run the code and display the output
-                echo '<span id="name">' . $cardObject->cardHolder . '</span><br>';
-                echo '<span id="balance">' . number_format_i18n($cardObject->cardBalance->value, 2). ' ' . __('SEK', 'chcw') . '</span><br>';
-                echo '<span id="card-link"><a href="https://kortladdning3.chalmerskonferens.se" target="_blank">' . __('Charge card','chcw') . '</a></span>';
+                echo '<p id="name">' . $cardObject->cardHolder . '</p>';
+                echo '<p id="balance">' . number_format_i18n($cardObject->cardBalance->value, 2). ' ' . __('SEK', 'chcw') . '</p>';
+                echo '<p id="card-link"><a href="https://kortladdning3.chalmerskonferens.se" target="_blank">' . __('Charge card','chcw') . '</a></p>';
                 
                 echo $args['after_widget'];
             }
