@@ -209,7 +209,7 @@ function ftek_uf_manage_users_custom_column( $output, $column_name, $user_id ) {
         }
         $output = $personalNumber;
     } else if ($column_name == 'booked-phone') {
-        $output = get_user_meta($user_id, 'booked-phone' , true);
+        $output = get_user_meta($user_id, 'booked_phone' , true);
     }
     return $output;
 }
