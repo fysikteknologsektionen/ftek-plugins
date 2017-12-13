@@ -44,8 +44,8 @@ function ftek_export_users() {
       }
     }
         jQuery(document).ready( function($)
-        {
-            $('form#filter-groups-form').append('<button class="button button-primary user_export_button" style="margin-left:0.5em;" onclick="download()">Export CSV</button>');
+        {   
+            $('.tablenav.top .clear, .tablenav.bottom .clear').before('<button class="button button-primary user_export_button" onclick="download()">Export CSV</button>');
         });
     </script>
     <?php
