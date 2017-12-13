@@ -41,7 +41,7 @@ function export_csv() {
                 'orderby'        => 'display_name',
                 'fields'         => 'all',
             );
-
+            
             // The User Query
             $blogusers = get_users( $args );
             // Array of WP_User objects.
