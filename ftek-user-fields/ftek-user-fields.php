@@ -186,6 +186,7 @@ function user_meta_update_form_field_chalmers_card( $user_id ) {
 function ftek_uf_manage_users_columns( $column_headers ) {
     $column_headers['personal-number'] = __( 'Personal ID number', 'ftek_uf' );
     unset($column_headers['booked_appointments']); // Hide appointments, since booking agent can't list users
+    unset($column_headers['posts']); // Hide number of posts
     return $column_headers;
 }
 
