@@ -185,6 +185,7 @@ function user_meta_update_form_field_chalmers_card( $user_id ) {
  */
 function ftek_uf_manage_users_columns( $column_headers ) {
     $column_headers['personal-number'] = __( 'Personal ID number', 'ftek_uf' );
+	$column_headers['booked-phone'] = __( 'Phone Number', 'ftek_uf' );
     unset($column_headers['posts']); // Hide number of posts
     unset($column_headers['role']); // Hide roles
     return $column_headers;
@@ -207,6 +208,8 @@ function ftek_uf_manage_users_custom_column( $output, $column_name, $user_id ) {
             $personalNumber = Defuse\Crypto\Crypto::decrypt($personalNumberEncrypted, $key);
         }
         $output = $personalNumber;
+    } else if ($column_name == 'booked-phone') {
+        $output = get_user_meta($user_id, 'booked-phone' , true);
     }
     return $output;
 }
