@@ -1,3 +1,4 @@
+<?php
 /*
 Plugin Name: Ftek Export Users
 Description: Adds export button to users page for current group
@@ -5,8 +6,6 @@ Author: Johan Winther (johwin)
 Text Domain: ftek_eu
 Domain Path: /languages
 */
-
-<?php
 
 /********* Export to csv ***********/
 add_action('admin_footer', 'ftek_export_users');
