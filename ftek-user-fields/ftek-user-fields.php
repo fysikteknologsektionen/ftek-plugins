@@ -183,7 +183,7 @@ function user_meta_update_form_field_chalmers_card( $user_id ) {
  * @param array $column_headers
  * @return array column headers
  */
-public static function ftek_uf_manage_users_columns( $column_headers ) {
+function ftek_uf_manage_users_columns( $column_headers ) {
     $column_headers['personal-number'] = __( 'Personal ID number', 'ftek_uf' );
     unset($column_headers['booked_appointments']); // Hide appointments, since booking agent can't list users
     return $column_headers;
@@ -197,7 +197,7 @@ public static function ftek_uf_manage_users_columns( $column_headers ) {
  * @param int $user_id
  * @return string custom column content
  */
-public static function ftek_uf_manage_users_custom_column( $output, $column_name, $user_id ) {
+function ftek_uf_manage_users_custom_column( $output, $column_name, $user_id ) {
     if ($column_name == 'personal-number') {
         $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
         $personalNumber = "";
