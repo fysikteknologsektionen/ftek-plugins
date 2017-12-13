@@ -1,4 +1,3 @@
-<?php
 /*
 Plugin Name: Ftek Export Users
 Description: Adds export button to users page for current group
@@ -60,3 +59,5 @@ function export_csv() {
         }
     }
 }
+
+?>
