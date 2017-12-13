@@ -20,6 +20,13 @@ function init_ftek_uf() {
     if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
         require_once( 'vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
     }
+    
+    if ( current_user_can( edit_users ) ) {
+			// filters to display the user's groups
+			add_filter( 'manage_users_columns', 'ftek_uf_manage_users_columns' );
+			// args: unknown, string $column_name, int $user_id
+			add_filter( 'manage_users_custom_column', 'ftek_uf_manage_users_custom_column', 8, 3 );
+	}
 }
 
 /*
@@ -168,4 +175,37 @@ function user_meta_update_form_field_chalmers_card( $user_id ) {
         'chalmers-card',
         $cardNumberEncrypted
     );
+}
+
+/**
+ * Adds a new column to the users table to show the personal ID number
+ * 
+ * @param array $column_headers
+ * @return array column headers
+ */
+public static function ftek_uf_manage_users_columns( $column_headers ) {
+    $column_headers['personal-number'] = __( 'Personal ID number', 'ftek_uf' );
+    unset($column_headers['booked_appointments']); // Hide appointments, since booking agent can't list users
+    return $column_headers;
+}
+
+/**
+ * Renders custom column content.
+ * 
+ * @param string $output 
+ * @param string $column_name
+ * @param int $user_id
+ * @return string custom column content
+ */
+public static function ftek_uf_manage_users_custom_column( $output, $column_name, $user_id ) {
+    if ($column_name == 'personal-number') {
+        $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
+        $personalNumber = "";
+        $personalNumberEncrypted = get_user_meta($user->ID, 'personnummer' , true);
+        if ($personalNumberEncrypted != "") {
+            $personalNumber = Defuse\Crypto\Crypto::decrypt($personalNumberEncrypted, $key);
+        }
+        $output = $personalNumber;
+    }
+    return $output;
 }
