@@ -45,8 +45,7 @@ function ftek_export_users() {
     }
         jQuery(document).ready( function($)
         {
-            $('form#the-list').append('<button class="button button-primary user_export_button" style="margin-left:0.5em;" value="Export CSV" onclick="download()" 
-            />');
+            $('form#the-list').append('<button class="button button-primary user_export_button" style="margin-left:0.5em;" value="Export CSV" onclick="download()" />');
         });
     </script>
     <?php
