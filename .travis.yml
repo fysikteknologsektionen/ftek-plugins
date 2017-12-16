@@ -4,3 +4,5 @@ php:
   - '7.0'
 before_script:
   - if find . -name "*.php" ! -path "./vendor/*" -print0 | xargs -0 -n 1 -P 8 php -l | grep -v "No syntax errors detected"; then exit 1; fi
+notifications:
+  email: false
