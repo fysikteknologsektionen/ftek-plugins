@@ -88,12 +88,8 @@ function ftek_export_users() {
     }
         jQuery(document).ready( function($)
         {   
-            // Copy email list
-            $('.tablenav.top .clear, .tablenav.bottom .clear').before('<button class="button email_copy_button" onclick="copyEmails()">Copy Email List</button>');
-            // Copy CSV button
-            $('.tablenav.top .clear, .tablenav.bottom .clear').before('<button class="button button-primary user_copy_button" onclick="copyAll()">Copy CSV</button>');
-            // Export CSV Button
-            $('.tablenav.top .clear, .tablenav.bottom .clear').before('<button class="button button-primary user_export_button" onclick="download()">Export CSV</button>');
+            var html = '<span class="button user_copy_button" onclick="copyAll()" style="margin-right: 0.5em;">Copy CSV</span><span class="button email_copy_button" onclick="copyEmails()" style="margin-right: 0.5em;">Copy Email List</span><button class="button button-primary user_export_button" onclick="download()" style="margin-right: 0.5em;">Export CSV</button>';
+            $(html).prependTo('div.tablenav-pages');
         });
     </script>
     <?php
