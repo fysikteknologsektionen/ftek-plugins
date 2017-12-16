@@ -16,35 +16,83 @@ function ftek_export_users() {
         return;
     ?>
     <script type="text/javascript">
-    function download() {
+    function getAllText() {
         var text = "";
-      try {
-      jQuery("tbody#the-list").find("tr").each(function(i,row) {
-          var row = jQuery(row);
-          var td = row.find("td").each(function(j,col) {
-              var col = jQuery(col);
-              if (col.hasClass("username")) {
-                  text += col.find("strong > a").text() + "\t";
-              } else if (!col.hasClass("groups_user_groups")) {
-                  text += col.text() + "\t";
-              }
+          jQuery("tbody#the-list").find("tr").each(function(i,row) {
+              var row = jQuery(row);
+              var td = row.find("td").each(function(j,col) {
+                  var col = jQuery(col);
+                  if (col.hasClass("username")) {
+                      text += col.find("strong > a").text() + "\t";
+                  } else if (!col.hasClass("groups_user_groups")) {
+                      text += col.text() + "\t";
+                  }
+              });
+              text += "\n";
           });
-          text += "\n";
-
-      });
-      var element = document.createElement('a');
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-      element.setAttribute('download', "users-" + (new Date()).toISOString().slice(0,10) + ".csv");
-      element.style.display = 'none';
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
+        return text;
+    }
+    function download() {
+      try {
+          var text = getAllText();
+          var element = document.createElement('a');
+          element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+          element.setAttribute('download', "users-" + (new Date()).toISOString().slice(0,10) + ".csv");
+          element.style.display = 'none';
+          document.body.appendChild(element);
+          element.click();
+          document.body.removeChild(element);
       } catch (e) {
-          alert("Kunde inte exportera. Kolla så att du är på rätt sida.");
+          alert("Kunde inte exportera. Vänligen kontakta Spidera!");
       }
+    }
+    function copyAll() {
+        copyText(getAllText());
+    }
+    function copyEmails() {
+      copyText($("tbody#the-list").find("td.email").map( 
+        function(i, el) {
+          return $(el).text()
+      }).get().join(" \n"););
+    }
+    function copyText(text) {
+      var textArea = document.createElement("textarea");
+      // Place in top-left corner of screen regardless of scroll position.
+      textArea.style.position = 'fixed';
+      textArea.style.top = 0;
+      textArea.style.left = 0;
+      // Ensure it has a small width and height. Setting to 1px / 1em
+      // doesn't work as this gives a negative w/h on some browsers.
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      // We don't need padding, reducing the size if it does flash render.
+      textArea.style.padding = 0;
+      // Clean up any borders.
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      // Avoid flash of white box if rendered for any reason.
+      textArea.style.background = 'transparent';
+      textArea.value = text;
+
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Copying text command was ' + msg);
+      } catch (err) {
+        console.log('Oops, unable to copy');
+      }
+      document.body.removeChild(textArea);
     }
         jQuery(document).ready( function($)
         {   
+            // Copy email list
+            $('.tablenav.top .clear, .tablenav.bottom .clear').before('<button class="button email_copy_button" onclick="copyEmails()">Copy Email List</button>');
+            // Copy CSV button
+            $('.tablenav.top .clear, .tablenav.bottom .clear').before('<button class="button button-primary user_copy_button" onclick="copyAll()">Copy CSV</button>');
+            // Export CSV Button
             $('.tablenav.top .clear, .tablenav.bottom .clear').before('<button class="button button-primary user_export_button" onclick="download()">Export CSV</button>');
         });
     </script>
