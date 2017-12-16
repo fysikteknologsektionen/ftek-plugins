@@ -52,8 +52,8 @@ function ftek_export_users() {
     function copyEmails() {
       copyText($("tbody#the-list").find("td.email").map( 
         function(i, el) {
-          return $(el).text()
-      }).get().join(" \n"););
+          return $(el).text();
+        }).get().join(" \n"));
     }
     function copyText(text) {
       var textArea = document.createElement("textarea");
