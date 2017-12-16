@@ -93,6 +93,7 @@ function ftek_export_users() {
             html += '<span class="button user_copy_button" onclick="copyAll()" style="margin-right: 0.5em;">Copy CSV</span>';
             html += '<span class="button button-primary user_export_button" onclick="download()" style="margin-right: 0.5em;">Export CSV</span></div>';
             $('div.tablenav-pages').before(html);
+            jQuery('div.tablenav.top > div.alignleft.actions').eq(1).hide(); // Also hide role editor on top
         });
     </script>
     <?php
