@@ -88,7 +88,7 @@ function ftek_export_users() {
     }
         jQuery(document).ready( function($)
         {   
-            var html = '<div class="tablenav-pages" style="float:left"><span class="button user_copy_button" onclick="copyAll()" style="margin-right: 0.5em;">Copy CSV</span><span class="button email_copy_button" onclick="copyEmails()" style="margin-right: 0.5em;">Copy Email List</span><button class="button button-primary user_export_button" onclick="download()" style="margin-right: 0.5em;">Export CSV</button></div>';
+            var html = '<div class="tablenav-pages" style="float:left"><span class="button user_copy_button" onclick="copyAll()" style="margin-right: 0.5em;">Copy CSV</span><span class="button email_copy_button" onclick="copyEmails()" style="margin-right: 0.5em;">Copy Email List</span><span class="button button-primary user_export_button" onclick="download()" style="margin-right: 0.5em;">Export CSV</span></div>';
             $('div.tablenav-pages').before(html);
         });
     </script>
