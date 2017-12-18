@@ -103,7 +103,7 @@ class ChalmersCardWidget extends WP_Widget {
 
         echo '<div id="card-input">';
         echo '<label for="card-number">' . __('Card number','chcw') . '</label>';
-        echo '<input type="text" id="card-number" style="margin: 0.5em 0em;padding: 0.3em 0.15em;" placeholder="#### #### #### ####">';
+        echo '<input type="text" id="card-number" style="margin: 0.5em 0em;padding: 0.3em 0.15em;">';
         echo '<button id="get-balance">' . __('Get balance', 'chcw') . '</button>';
         echo '</div>';
 
