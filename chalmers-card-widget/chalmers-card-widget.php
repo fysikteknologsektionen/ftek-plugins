@@ -15,7 +15,7 @@ add_action( 'init', 'init_chcw' );
 function init_chcw() {
 
     if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
-        require_once(__DIR__ . '/../ftek-user-fields/vendor/autoload.php');
+        require_once('vendor/autoload.php');
     }
 
     // Load translations
