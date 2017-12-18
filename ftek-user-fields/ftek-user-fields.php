@@ -173,10 +173,10 @@ function user_meta_update_form_field_chalmers_card( $user_id ) {
     if ($cardNumber == "") {
         $cardNumberHashed = "";
     } else {
-        // Import wordpress hashing function
-        require_once(ABSPATH . 'wp-includes/class-phpass.php');
-        $wp_hasher = new PasswordHash(16, FALSE); // Use Blowfish
-        $cardNumberHashed = wp_hash_password($cardNumber);
+        $options = [
+            'cost' => 11
+        ];
+        $cardNumberHashed = password_hash($cardNumber, PASSWORD_BCRYPT, $options);
     }
     return update_user_meta(
         $user_id,
