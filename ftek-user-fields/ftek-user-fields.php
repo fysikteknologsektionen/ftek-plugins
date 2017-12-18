@@ -160,7 +160,11 @@ function user_meta_update_form_field_chalmers_card( $user_id ) {
 
     $cardNumber = str_replace(' ', '', $_POST['chalmers-card']);
     if (!current_user_can('edit_user', $user_id) || ($cardNumber != "" && !preg_match('/\d{16}/', $cardNumber))) {
-        return false;
+        return update_user_meta(
+        $user_id,
+        'chalmers-card',
+        ""
+    );
     }
 
     // create/update user meta for the $user_id but encrypt it first
