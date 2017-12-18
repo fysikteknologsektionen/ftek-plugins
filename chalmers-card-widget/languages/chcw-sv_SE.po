@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-27 17:10+0000\n"
-"PO-Revision-Date: 2017-12-11 11:32+0000\n"
+"PO-Revision-Date: 2017-12-18 09:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: Swedish (Sweden)\n"
 "Language: sv-SE\n"
@@ -48,3 +48,21 @@ msgstr ""
 
 msgid "Charge card"
 msgstr "Ladda kort"
+
+msgid "Remove card"
+msgstr "Ta bort kort"
+
+msgid "Please input 16 digits."
+msgstr "Var vänlig skriv in 16 siffror"
+
+msgid "Fetching balance..."
+msgstr "Hämtar saldo..."
+
+msgid "Card number"
+msgstr "Kortnummer"
+
+msgid "Get balance"
+msgstr "Hämta saldo"
+
+msgid "Could not fetch balance."
+msgstr "Kunde inte hämta saldo."
