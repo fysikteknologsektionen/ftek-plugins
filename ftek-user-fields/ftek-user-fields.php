@@ -21,7 +21,7 @@ function init_ftek_uf() {
         require_once( 'vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
     }
 
-    if ( current_user_can( edit_user ) ) {
+    if ( current_user_can('edit_users') ) {
         // filters to display the user's groups
         add_filter( 'manage_users_columns', 'ftek_uf_manage_users_columns' );
         // args: unknown, string $column_name, int $user_id
