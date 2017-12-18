@@ -131,7 +131,7 @@ function user_meta_show_form_field_chalmers_card( $user ) {
             <td>
                 <?php if ( get_user_meta($user->ID, 'chalmers-card' , true) != "" ): ?>
                     <p><strong><?= __('Your card is saved.','ftek_uf') ?> </strong></p>
-                <?php else ?>
+                <?php else: ?>
                     <p><strong><?= __('You do not have a card saved.','ftek_uf') ?> </strong></p>
                 <?php endif ?>
                 <input type="text"
