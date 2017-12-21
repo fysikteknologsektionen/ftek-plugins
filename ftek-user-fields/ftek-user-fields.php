@@ -16,7 +16,7 @@ add_action( 'init', 'init_ftek_uf' );
 function init_ftek_uf() {
     // Load translations
     load_plugin_textdomain('ftek_uf', false, basename( dirname( __FILE__ ) ) . '/languages' );
-    load_plugin_textdomain('chcw', false, basename( dirname( __FILE__ ) ) . '../chalmers-card-widget/languages' );
+    //load_plugin_textdomain('chcw', false, basename( dirname( __FILE__ ) ) . '../chalmers-card-widget/languages' );
     if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
         require_once( 'vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
     }
@@ -117,7 +117,7 @@ function user_meta_update_form_field_personal_id_number( $user_id ) {
 /*
 * Profile field for Student Union card
 */
-add_action( 'show_user_profile', 'user_meta_show_form_field_chalmers_card' );
+/*add_action( 'show_user_profile', 'user_meta_show_form_field_chalmers_card' );
 function user_meta_show_form_field_chalmers_card( $user ) {
     ?>
 
@@ -150,6 +150,7 @@ function user_meta_show_form_field_chalmers_card( $user ) {
     </table>
 <?php }
 add_action( 'personal_options_update', 'user_meta_update_form_field_chalmers_card' );
+*/
 /**
 * The save action.
 *
@@ -157,6 +158,7 @@ add_action( 'personal_options_update', 'user_meta_update_form_field_chalmers_car
 *
 * @return bool Meta ID if the key didn't exist, true on successful update, false on failure.
 */
+/*
 function user_meta_update_form_field_chalmers_card( $user_id ) {
     // check that the current user have the capability to edit the $user_id
 
@@ -184,7 +186,7 @@ function user_meta_update_form_field_chalmers_card( $user_id ) {
         $cardNumberHashed
     );
 }
-
+*/
 /**
 * Adds a new column to the users table to show the personal ID number
 *
