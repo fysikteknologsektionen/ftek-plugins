@@ -43,7 +43,7 @@ function fillCardData(cardData) {
 }
 
 function resetCard() {
-    setCookie('chalmers-card', "", -30 * 6);
+    setCookie('chalmers-card', "", -30 * 6); // Remove cookie by settings negative time
     $("p#error-message").text("");
     $("div#card-info").hide();
     $("div#card-message").hide();
@@ -65,7 +65,7 @@ jQuery(document).ready(function($){
                 'card-number': cardNumber
             };
             $.post(ajax_object.ajax_url, data, function(response) {
-                setCookie('chalmers-card', response, 30 * 6);
+                setCookie('chalmers-card', response, 365 * 5);
                 fetchCardData();
             });
         } else {
