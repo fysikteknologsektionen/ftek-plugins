@@ -49,17 +49,17 @@ add_shortcode('ftek_meta_form', 'ftek_meta_form_shortcode');
 
 
 function ftek_update_meta() {
-    $_POST = $_POST;
-    $_POST = $_POST['post'];
-    parse_str($_POST, $_POST);
-    if (isset($_POST['nickname'])) {
-        update_user_meta(get_current_user_id(), 'nickname', $POST['nickname']);
+    $data = $_POST;
+    $data = $data['post'];
+    parse_str($data, $data);
+    if (isset($data['nickname'])) {
+        update_user_meta(get_current_user_id(), 'nickname', $data['nickname']);
     }
-    if (isset($_POST['phone_number'])) {
-        update_user_meta(get_current_user_id(), 'booked_phone', $POST['phone_number']);
+    if (isset($data['phone_number'])) {
+        update_user_meta(get_current_user_id(), 'booked_phone', $data['phone_number']);
     }
-    if (isset($_POST['personal_number'])) {
-        $personalNumber = $P_OST['personal_number'];
+    if (isset($data['personal_number'])) {
+        $personalNumber = $data['personal_number'];
         if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
             require_once(plugin_dir_url(__FILE__) . '/vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
         }
