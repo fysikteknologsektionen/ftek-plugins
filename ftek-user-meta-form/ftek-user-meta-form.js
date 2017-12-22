@@ -20,6 +20,12 @@ jQuery(document).ready(function($){
                 return false;
             }
         }
+        if ($("#phone-number").length != 0) {
+            if ($("#phone-number").val() === "") {
+                $("#phone-number-message").text(" Fyll i ditt mobilnummer.");
+                return false;
+            }
+        }
         $.post( ftek_user_meta_obj.ajaxurl, {
             action : 'ftek_update_meta',
             post : $("form#meta-form").serialize()
