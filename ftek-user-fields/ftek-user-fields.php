@@ -16,7 +16,6 @@ add_action( 'init', 'init_ftek_uf' );
 function init_ftek_uf() {
     // Load translations
     load_plugin_textdomain('ftek_uf', false, basename( dirname( __FILE__ ) ) . '/languages' );
-    //load_plugin_textdomain('chcw', false, basename( dirname( __FILE__ ) ) . '../chalmers-card-widget/languages' );
     if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
         require_once( 'vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
     }
@@ -88,6 +87,10 @@ add_action( 'edit_user_profile_update', 'user_meta_update_form_field_personal_id
 * @return bool Meta ID if the key didn't exist, true on successful update, false on failure.
 */
 function user_meta_update_form_field_personal_id_number( $user_id ) {
+    user_meta_update_form_field_personal_id_number_save( $user_id, $_POST['personnummer'] );
+}
+
+function user_meta_update_form_field_personal_id_number_save( $user_id, $personalNumber ) {
     $is_active = false;
     require_once( ABSPATH . 'wp-includes/pluggable.php' );
     if ( $group = Groups_Group::read_by_name( 'Sektionsaktiva' ) ) {
@@ -95,15 +98,15 @@ function user_meta_update_form_field_personal_id_number( $user_id ) {
     }
     if ($is_active) {
         // check that the current user have the capability to edit the $user_id
-        if (!current_user_can('edit_user', $user_id) || ($_POST['personnummer'] != "" && !preg_match('/[0-9]{2}((0[0-9])|(10|11|12))(([0-2][0-9])|(3[0-1]))-[0-9]{4}/', $_POST['personnummer']))) {
+        if (!current_user_can('edit_user', $user_id) || ($personalNumber != "" && !preg_match('/[0-9]{2}((0[0-9])|(10|11|12))(([0-2][0-9])|(3[0-1]))-[0-9]{4}/', $_POST['personnummer']))) {
             return false;
         }
         // create/update user meta for the $user_id but encrypt it first
         $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
-        if ($_POST['personnummer'] == "") {
+        if ($personalNumber == "") {
             $personalNumberEncrypted = "";
         } else {
-            preg_match('/[0-9]{2}((0[0-9])|(10|11|12))(([0-2][0-9])|(3[0-1]))-[0-9]{4}/', $_POST['personnummer'], $matches);
+            preg_match('/[0-9]{2}((0[0-9])|(10|11|12))(([0-2][0-9])|(3[0-1]))-[0-9]{4}/', $personalNumber, $matches);
             $personalNumberEncrypted = Defuse\Crypto\Crypto::encrypt($matches[0], $key);
         }
         return update_user_meta(
@@ -113,80 +116,6 @@ function user_meta_update_form_field_personal_id_number( $user_id ) {
         );
     }
 }
-
-/*
-* Profile field for Student Union card
-*/
-/*add_action( 'show_user_profile', 'user_meta_show_form_field_chalmers_card' );
-function user_meta_show_form_field_chalmers_card( $user ) {
-    ?>
-
-    <h3>Chalmers</h3>
-
-    <table class="form-table">
-        <tr>
-            <th>
-                <label for="chalmers_card"><?= __('Student Union Card' , 'chcw') ?></label>
-            </th>
-            <td>
-                <?php if ( get_user_meta($user->ID, 'chalmers-card' , true) != "" ): ?>
-                    <p><strong><?= __('Your card is saved.','ftek_uf') ?> </strong></p>
-                <?php else: ?>
-                    <p><strong><?= __('You do not have a card saved.','ftek_uf') ?> </strong></p>
-                <?php endif ?>
-                <input type="text"
-                class="regular-text ltr"
-                id="chalmers-card"
-                name="chalmers-card"
-                value=""
-                title="<?= __("You can find your 16 digit number on your Student Union Card.", 'ftek_uf') ?>"
-                pattern="\d{16}"
-                required>
-                <p class="description">
-                    <?= __("Write the whole number on your Student Union Card. This needs to be updated when you get a new one.",'ftek_uf') ?>
-                </p>
-            </td>
-        </tr>
-    </table>
-<?php }
-add_action( 'personal_options_update', 'user_meta_update_form_field_chalmers_card' );
-*/
-/**
-* The save action.
-*
-* @param $user_id int the ID of the current user.
-*
-* @return bool Meta ID if the key didn't exist, true on successful update, false on failure.
-*/
-/*
-function user_meta_update_form_field_chalmers_card( $user_id ) {
-    // check that the current user have the capability to edit the $user_id
-
-    $cardNumber = str_replace(' ', '', $_POST['chalmers-card']);
-    if (!current_user_can('edit_user', $user_id) || ($cardNumber != "" && !preg_match('/\d{16}/', $cardNumber))) {
-        return update_user_meta(
-        $user_id,
-        'chalmers-card',
-        ""
-    );
-    }
-
-    // create/update user meta for the $user_id but encrypt it first
-    if ($cardNumber == "") {
-        $cardNumberHashed = "";
-    } else {
-        $options = [
-            'cost' => 11
-        ];
-        $cardNumberHashed = password_hash($cardNumber, PASSWORD_BCRYPT, $options);
-    }
-    return update_user_meta(
-        $user_id,
-        'chalmers-card',
-        $cardNumberHashed
-    );
-}
-*/
 /**
 * Adds a new column to the users table to show the personal ID number
 *
