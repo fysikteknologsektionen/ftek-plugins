@@ -44,7 +44,7 @@ function ftek_update_meta() {
     $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
     preg_match('/[0-9]{2}((0[0-9])|(10|11|12))(([0-2][0-9])|(3[0-1]))-[0-9]{4}/', $personalNumber, $matches);
     $personalNumberEncrypted = Defuse\Crypto\Crypto::encrypt($matches[0], $key);
-    update_user_meta($user_id, 'personnummer', $personalNumberEncrypted);
+    update_user_meta(get_current_user_id(), 'personnummer', $personalNumberEncrypted);
     echo "Updated";
     wp_die();
 }
