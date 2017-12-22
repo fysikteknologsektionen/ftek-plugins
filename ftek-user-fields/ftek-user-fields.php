@@ -16,9 +16,6 @@ add_action( 'init', 'init_ftek_uf' );
 function init_ftek_uf() {
     // Load translations
     load_plugin_textdomain('ftek_uf', false, basename( dirname( __FILE__ ) ) . '/languages' );
-    if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
-        require_once( 'vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
-    }
 
     if ( current_user_can('edit_users') ) {
         // filters to display the user's groups
@@ -42,6 +39,9 @@ function user_meta_show_form_field_personal_id_number( $user ) {
         $is_active = Groups_User_Group::read( get_current_user_id() , $group->group_id );
     }
     if ($is_active) {
+        if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
+            require_once(plugin_dir_url(__FILE__) . '/vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
+        }
         $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
         $personalNumber = "";
         $personalNumberEncrypted = get_user_meta($user->ID, 'personnummer' , true);
@@ -101,6 +101,9 @@ function user_meta_update_form_field_personal_id_number_save( $user_id, $persona
         if (!current_user_can('edit_user', $user_id) || ($personalNumber != "" && !preg_match('/[0-9]{2}((0[0-9])|(10|11|12))(([0-2][0-9])|(3[0-1]))-[0-9]{4}/', $_POST['personnummer']))) {
             return false;
         }
+        if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
+            require_once(plugin_dir_url(__FILE__) . '/vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
+        }
         // create/update user meta for the $user_id but encrypt it first
         $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
         if ($personalNumber == "") {
@@ -140,6 +143,9 @@ function ftek_uf_manage_users_columns( $column_headers ) {
 */
 function ftek_uf_manage_users_custom_column( $output, $column_name, $user_id ) {
     if ($column_name == 'personal-number') {
+        if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
+            require_once(plugin_dir_url(__FILE__) . '/vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
+        }
         $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
         $personalNumber = "";
         $personalNumberEncrypted = get_user_meta($user_id, 'personnummer' , true);
