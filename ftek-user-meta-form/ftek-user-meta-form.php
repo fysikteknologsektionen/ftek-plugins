@@ -18,7 +18,7 @@ function ftek_meta_form_shortcode($atts, $content, $tag)
     
 
     $output = '<form id="meta-form" method="POST">';
-    if (get_user_meta(get_current_user_id(), 'nickname', true) == "") {
+    if (get_user_meta(get_current_user_id(), 'nickname', true) == wp_get_current_user()->user_login) {
         $output .= '<p><label for="nickname">Smeknamn: <br />';
         $output .= '<input type="text" id="nickname" name="nickname">';
         $output .= '</label></p>';
@@ -36,7 +36,7 @@ function ftek_meta_form_shortcode($atts, $content, $tag)
     }
     $output .= '<p><input type="submit" value="Spara" /><span id="form-message"></span></p>';
     $output .= '</form>';
-    if (get_user_meta(get_current_user_id(), 'nickname', true) != "" &&
+    if (get_user_meta(get_current_user_id(), 'nickname', true) != wp_get_current_user()->user_login &&
         get_user_meta(get_current_user_id(), 'booked_phone', true) != "" &&
         get_user_meta(get_current_user_id(), 'personnummer', true) != "") {
         return '<p>Du har redan fyllt i dina uppgifter.</p>';
