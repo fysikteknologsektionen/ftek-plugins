@@ -24,6 +24,9 @@ jQuery(document).ready(function($){
             if ($("#phone-number").val() === "") {
                 $("#phone-number-message").text(" Fyll i ditt mobilnummer.");
                 return false;
+            } else {
+                var phoneNumber = $("#phone-number").val().replace(" ","").replace("-","");
+                $("#phone-number").val(phoneNumber);
             }
         }
         $.post( ftek_user_meta_obj.ajaxurl, {
