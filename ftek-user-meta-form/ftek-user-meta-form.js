@@ -14,6 +14,12 @@ jQuery(document).ready(function($){
                 return false;
             }
         }
+        if ($("#nickname").length != 0) {
+            if ($("#nickname").val() === "") {
+                $("#nickname-message").text(" Fyll i ditt smeknamn (eller förnamn om du inte har ett).");
+                return false;
+            }
+        }
         $.post( ftek_user_meta_obj.ajaxurl, {
             action : 'ftek_update_meta',
             post : $("form#meta-form").serialize()
@@ -21,6 +27,7 @@ jQuery(document).ready(function($){
         function(response) {
             if (response === "Updated") {
                 $("#personal-number-message").text("");
+                $("#nickname-message").text("");
                 $("#form-message").text(" Sparat.");
             }
         });
