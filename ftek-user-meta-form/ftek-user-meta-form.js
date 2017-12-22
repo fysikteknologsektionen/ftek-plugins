@@ -14,6 +14,7 @@ jQuery(document).ready(function($){
             },
             function(response) {
                 if (response === "Updated") {
+                    $("#personal-number-message").text("");
                     $("#form-message").text(" Sparat.");
                 }
             });
