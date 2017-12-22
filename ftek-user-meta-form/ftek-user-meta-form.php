@@ -36,18 +36,19 @@ add_shortcode('ftek_meta_form', 'ftek_meta_form_shortcode');
 
 
 function ftek_update_meta() {
-    echo $_POST;
-    wp_die();
-    $dataString = $data['post'];
-    parse_str($dataString, $dataArray);
-    $personalNumber = $_POST['personal_number'];
+    $POST = $_POST;
+    $POST = $POST['post'];
+    parse_str($POST, $POST);
+    $personalNumber = $POST['personal_number'];
+
     if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
         require_once(plugin_dir_url(__FILE__) . '/vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
     }
     // create/update user meta for the $user_id but encrypt it first
     $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
     $personalNumberEncrypted = Defuse\Crypto\Crypto::encrypt($personalNumber, $key);
-    echo update_user_meta(get_current_user_id(), 'personnummer', $personalNumberEncrypted);
+    update_user_meta(get_current_user_id(), 'personnummer', $personalNumberEncrypted);
+    echo "Updated";
     wp_die();
 }
 
