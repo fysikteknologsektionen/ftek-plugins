@@ -23,7 +23,7 @@ function ftek_meta_form_shortcode($atts, $content, $tag)
         $output .= '<input type="text" id="nickname" name="nickname">';
         $output .= '</label></p>';
     }
-    if (get_user_meta(get_current_user_id(), 'booked-phone', true) == "") {
+    if (get_user_meta(get_current_user_id(), 'booked_phone', true) == "") {
         $output .= '<p><label for="phone_number">Mobilnummer: <br />';
         $output .= '<input type="text" id="phone-number" name="phone_number">';
         $output .= '</label></p>';
@@ -37,7 +37,7 @@ function ftek_meta_form_shortcode($atts, $content, $tag)
     $output .= '<p><input type="submit" value="Spara" /><span id="form-message"></span></p>';
     $output .= '</form>';
     if (get_user_meta(get_current_user_id(), 'nickname', true) != "" &&
-        get_user_meta(get_current_user_id(), 'booked-phone', true) != "" &&
+        get_user_meta(get_current_user_id(), 'booked_phone', true) != "" &&
         get_user_meta(get_current_user_id(), 'personnummer', true) != "") {
         return '<p>Du har redan fyllt i dina uppgifter.</p>';
     } else {
@@ -56,7 +56,7 @@ function ftek_update_meta() {
         update_user_meta(get_current_user_id(), 'nickname', $POST['nickname']);
     }
     if (isset($_POST['phone_number'])) {
-        update_user_meta(get_current_user_id(), 'booked-phone', $POST['phone_number']);
+        update_user_meta(get_current_user_id(), 'booked_phone', $POST['phone_number']);
     }
     if (isset($_POST['personal_number'])) {
         $personalNumber = $P_OST['personal_number'];
