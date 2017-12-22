@@ -56,7 +56,7 @@ jQuery(document).ready(function($){
         fetchCardData();
     }
 
-    $("button#get-balance").click(function() {
+    $("form#card-form").submit(function() {
         var cardNumber = $("input#card-number").val().replace(/\s/g, '');
         $("input#card-number").val(cardNumber);
         if (/^\d{16}/.test(cardNumber)) {
@@ -74,6 +74,7 @@ jQuery(document).ready(function($){
             $("p#error-message").text(ajax_object.wrong_format);
             $("p#error-message").show();
         }
+        return false; // Stop form from submitting
     });
 
     $("button#remove-card").click(function() {
