@@ -21,11 +21,13 @@ function ftek_meta_form_shortcode($atts, $content, $tag)
     if (get_user_meta(get_current_user_id(), 'nickname', true) == wp_get_current_user()->user_login) {
         $output .= '<p><label for="nickname">Smeknamn: <br />';
         $output .= '<input type="text" id="nickname" name="nickname">';
+        $output .= '<span id="nickname-message" style="color:red"></span>';
         $output .= '</label></p>';
     }
     if (get_user_meta(get_current_user_id(), 'booked_phone', true) == "") {
         $output .= '<p><label for="phone_number">Mobilnummer: <br />';
         $output .= '<input type="text" id="phone-number" name="phone_number">';
+        $output .= '<span id="phone-number-message" style="color:red"></span>';
         $output .= '</label></p>';
     }
     if (get_user_meta(get_current_user_id(), 'personnummer', true) == "") {
