@@ -34,6 +34,7 @@ jQuery(document).ready(function($){
             if (response === "Updated") {
                 $("#personal-number-message").text("");
                 $("#nickname-message").text("");
+                $("#phone-number-message").text("");
                 $("#form-message").text(" Sparat.");
             }
         });
