@@ -17,6 +17,9 @@ function init_ftek_uf() {
     // Load translations
     load_plugin_textdomain('ftek_uf', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
+    if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
+        require_once(plugin_dir_url(__FILE__) . '/vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
+    }
     if ( current_user_can('edit_users') ) {
         // filters to display the user's groups
         add_filter( 'manage_users_columns', 'ftek_uf_manage_users_columns' );
@@ -39,9 +42,6 @@ function user_meta_show_form_field_personal_id_number( $user ) {
         $is_active = Groups_User_Group::read( get_current_user_id() , $group->group_id );
     }
     if ($is_active) {
-        if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
-            require_once(plugin_dir_url(__FILE__) . '/vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
-        }
         $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
         $personalNumber = "";
         $personalNumberEncrypted = get_user_meta($user->ID, 'personnummer' , true);
@@ -87,10 +87,7 @@ add_action( 'edit_user_profile_update', 'user_meta_update_form_field_personal_id
 * @return bool Meta ID if the key didn't exist, true on successful update, false on failure.
 */
 function user_meta_update_form_field_personal_id_number( $user_id ) {
-    user_meta_update_form_field_personal_id_number_save( $user_id, $_POST['personnummer'] );
-}
-
-function user_meta_update_form_field_personal_id_number_save( $user_id, $personalNumber ) {
+    $personalNumber = $_POST['personnummer'];
     $is_active = false;
     require_once( ABSPATH . 'wp-includes/pluggable.php' );
     if ( $group = Groups_Group::read_by_name( 'Sektionsaktiva' ) ) {
@@ -100,9 +97,6 @@ function user_meta_update_form_field_personal_id_number_save( $user_id, $persona
         // check that the current user have the capability to edit the $user_id
         if (!current_user_can('edit_user', $user_id) || ($personalNumber != "" && !preg_match('/[0-9]{2}((0[0-9])|(10|11|12))(([0-2][0-9])|(3[0-1]))-[0-9]{4}/', $_POST['personnummer']))) {
             return false;
-        }
-        if ( !class_exists( 'Defuse\Crypto\Crypto' ) ) {
-            require_once(plugin_dir_url(__FILE__) . '/vendor/autoload.php'); // Make sure to run composer install in current folder to download dependencies
         }
         // create/update user meta for the $user_id but encrypt it first
         $key = Defuse\Crypto\Key::loadFromAsciiSafeString( PERSON_ENCRYPT_KEY );
@@ -119,6 +113,7 @@ function user_meta_update_form_field_personal_id_number_save( $user_id, $persona
         );
     }
 }
+
 /**
 * Adds a new column to the users table to show the personal ID number
 *
