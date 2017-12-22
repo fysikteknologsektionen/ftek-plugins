@@ -5,7 +5,7 @@ jQuery(document).ready(function($){
         e.preventDefault();
         if ($("#personal-number").length != 0) {
             var regexPersonalNumber = /[0-9]{2}((0[0-9])|(10|11|12))(([0-2][0-9])|(3[0-1]))-[0-9]{4}/;
-            var personalNumber = $("#personal-number").val().replace(" ","");
+            var personalNumber = $("#personal-number").val().replace(/\s+/g, '');
             if (regexPersonalNumber.test(personalNumber)) {
                 personalNumber = personalNumber.match(regexPersonalNumber)[0];
                 $("#personal-number").val(personalNumber);
@@ -25,7 +25,7 @@ jQuery(document).ready(function($){
                 $("#phone-number-message").text(" Fyll i ditt mobilnummer.");
                 return false;
             } else {
-                var phoneNumber = $("#phone-number").val().replace(" ","").replace("-","");
+                var phoneNumber = $("#phone-number").val().replace(/\s+/g, '').replace(/-/g,"");
                 $("#phone-number").val(phoneNumber);
             }
         }
