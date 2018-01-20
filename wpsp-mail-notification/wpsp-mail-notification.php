@@ -9,7 +9,7 @@ Author: Eric Carlsson
 add_action( 'wpsp_after_create_ticket', 'wpsp_mail' );
 function wpsp_mail($ticket_id) {
   global $wpdb;
-  $sql = "SELECT subject, guest_name, guest_email, create_time FROM {$wpdb->prefix}wpsp_ticket WHERE id=" . $ticket_id;
+  $sql = 'SELECT subject, guest_name, guest_email, create_time FROM {$wpdb->prefix}wpsp_ticket WHERE id=' . $ticket_id;
   $result = $wpdb->get_row($sql);
   if ($result != null) {
     $mail_to = 'spidera@ftek.se';
