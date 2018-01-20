@@ -1,8 +1,8 @@
 <?php
 
 /*
-Plugin Name: WP Support Plus: sMail Notification
-Description: Sends an e-mail to predefined adress when a new ticket is created through WP Support Plus.
+Plugin Name: WP Support Plus: Mail Notification
+Description: Sends an e-mail with some details to predefined adress when a new ticket is created in WP Support Plus.
 Author: Eric Carlsson
 */
 
