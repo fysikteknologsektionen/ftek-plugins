@@ -2,16 +2,20 @@
 
 /*
 Plugin Name: WP Support Plus: Mail Notification
-Description: Sends an e-mail with some details to predefined adress when a new ticket is created in WP Support Plus.
+Description: Sends an e-mail with some details to a predefined adress when a new ticket is created in WP Support Plus.
 Author: Eric Carlsson
 */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 add_action( 'wpsp_after_create_ticket', 'wpsp_mail' );
 function wpsp_mail($ticket_id) {
   global $wpdb;
-  $sql = 'SELECT subject, guest_name, guest_email, create_time FROM {$wpdb->prefix}wpsp_ticket WHERE id=' . $ticket_id;
+  $sql = $wpdb->prepare('SELECT subject, guest_name, guest_email, create_time FROM {$wpdb->prefix}wpsp_ticket WHERE id=%d', $ticket_id);
   $result = $wpdb->get_row($sql);
-  if ($result != null) {
+  if (!is_null($result)) {
     $mail_to = 'spidera@ftek.se';
     $mail_subject = '[Ticket #' . $ticket_id . '] WP Support Plus notification';
     $mail_message = '<html><font size=4>A new ticket has been created</font><br /><b>Author:</b> ' . $result->guest_name
