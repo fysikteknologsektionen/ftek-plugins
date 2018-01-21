@@ -2,4 +2,13 @@
 Custom WordPress plugins for ftek.se
 
 ## Plugins
-Widget for card balance
+### Chalmers Card Widget
+### Chalmers Lunch Widget
+### Ftek Course Pages
+### Ftek Documents List
+### Ftek Documents Manager
+### Ftek Export Users
+### Ftek Misc
+### Ftek User Fields
+### Ftek User Meta Form
+### VBL Documents Manager
