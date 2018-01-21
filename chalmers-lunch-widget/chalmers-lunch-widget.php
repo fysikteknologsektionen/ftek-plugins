@@ -79,14 +79,16 @@ function chlw_get_menu($restName, $lang) {
 
   // For every category, make a list of dishes
   $menu = array();
-  foreach ($dayMenu->recipeCategories as $cat) {
-    $catName = $lang == "sv" ? $cat->name : $cat->nameEnglish;
+  if (!$dayMenu->recipeCategories) {
+     foreach ($dayMenu->recipeCategories as $cat) {
+       $catName = $lang == "sv" ? $cat->name : $cat->nameEnglish;
 
-    $menu[$catName] = array_map(
-        function($dish) use ($lang) {
-          return chlw_format_dish($dish, $lang);
-        },
-        $cat->recipes);
+       $menu[$catName] = array_map(
+           function($dish) use ($lang) {
+             return chlw_format_dish($dish, $lang);
+           },
+           $cat->recipes);
+     }
   }
 
   return $menu;
