@@ -28,7 +28,11 @@ function fetchCardData() {
             error: function(e) {
                 resetCard();
                 $("div#card-message").show();
-                $("p#error-message").text(e.responseJSON.error);
+                if ("responseJSON" in e) { 
+                    $("p#error-message").text(e.responseJSON.error);
+                } else {
+                    $("p#error-message").text("Request timed out.");
+                }
                 $("p#error-message").show();
             }
         });
