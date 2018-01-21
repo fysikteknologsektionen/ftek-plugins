@@ -79,7 +79,7 @@ function chlw_get_menu($restName, $lang) {
 
   // For every category, make a list of dishes
   $menu = array();
-  if (!$dayMenu->recipeCategories) {
+  if (isset($dayMenu->recipeCategories)) {
      foreach ($dayMenu->recipeCategories as $cat) {
        $catName = $lang == "sv" ? $cat->name : $cat->nameEnglish;
 
