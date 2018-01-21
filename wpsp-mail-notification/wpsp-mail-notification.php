@@ -16,7 +16,7 @@ function wpsp_mail($ticket_id) {
   $sql = $wpdb->prepare('SELECT subject, guest_name, guest_email, create_time FROM {$wpdb->prefix}wpsp_ticket WHERE id=%d', $ticket_id);
   $result = $wpdb->get_row($sql);
   if (!is_null($result)) {
-    $mail_to = 'spidera@ftek.se';
+    $mail_to = get_bloginfo('admin_email');
     $mail_subject = '[Ticket #' . $ticket_id . '] WP Support Plus notification';
     $mail_message = '<html><font size=4>A new ticket has been created</font><br /><b>Author:</b> ' . $result->guest_name
                     . '<br \><b>Author email:</b> ' . $result->guest_email
