@@ -23,7 +23,7 @@ function wpsp_mail($ticket_id) {
                     . '<br \><b>Author email:</b> ' . $result->guest_email
                     . '<br \><b>Subject:</b> ' . $result->subject
                     . '<br \><b>Date:</b> ' . $result->create_time
-                    . '<br \><a href="' . $support_url . '"><b>View ticket by clicking here</b></a></html>';
+                    . '<br \><a href="' . $support_url . '"><b>View ticket by clicking here</b></a><br \><br \></html>';
     $mail_headers = array('Content-Type: text/html; charset=UTF-8');
     wp_mail($mail_to, $mail_subject, $mail_message, $mail_headers);
   }
