@@ -34,7 +34,12 @@ function get_ftek_course_field($ID, $field)
     if ( ! $ID ) {
         $ID = get_the_ID();
     }
-    return get_post_meta($ID, FTEK_COURSE_PREFIX . $field);
+    $post_meta_value = get_post_meta($ID, FTEK_COURSE_PREFIX . $field);
+    if ( count($post_meta_value) < 1) {
+        return array(null);
+    } else {
+        return $post_meta_value;
+    }
 }
 
 function course_code($ID = NULL)
@@ -116,14 +121,12 @@ function course_pretty_study_periods($ID = NULL)
 {
     $SPs = course_study_periods($ID);
     $SP_count = count($SPs);
+    $result = '';
     if ($SP_count == 1) {
         $result .= $SPs[0];
     }
     elseif ($SP_count > 1) {
         $result .= $SPs[0] . '–' . end($SPs);
-    }
-    else {
-        return '';
     }
     return $result;
 }
