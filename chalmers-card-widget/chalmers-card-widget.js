@@ -9,7 +9,7 @@ function getCookie(key) {
     return keyValue ? keyValue[2] : null;
 }
 
-function fetchCardData() {
+function fetchCardData($) {
     $("p#error-message").text("");
     $("div#card-message").show();
     $("p#fetch-message").show();
@@ -26,7 +26,7 @@ function fetchCardData() {
             },
             timeout: 3000,
             error: function(e) {
-                resetCard();
+                resetCard(0);
                 $("div#card-message").show();
                 if ("responseJSON" in e) { 
                     $("p#error-message").text(e.responseJSON.error);
@@ -46,8 +46,9 @@ function fillCardData(cardData) {
     $("div#card-info").show();
 }
 
-function resetCard() {
-    setCookie('chalmers-card', "", -30 * 6); // Remove cookie by settings negative time
+function resetCard(removeCookie) {
+    if (removeCookie)
+        setCookie('chalmers-card', "", -30 * 6); // Remove cookie by settings negative time
     $("p#error-message").text("");
     $("div#card-info").hide();
     $("div#card-message").hide();
@@ -57,7 +58,7 @@ function resetCard() {
 
 jQuery(document).ready(function($){
     if (getCookie('chalmers-card') !== null) {
-        fetchCardData();
+        fetchCardData($);
     }
 
     $("form#card-form").submit(function() {
@@ -70,10 +71,10 @@ jQuery(document).ready(function($){
             };
             $.post(ajax_object.ajax_url, data, function(response) {
                 setCookie('chalmers-card', response, 365 * 5);
-                fetchCardData();
+                fetchCardData($);
             });
         } else {
-            resetCard();
+            resetCard(1);
             $("div#card-message").show();
             $("p#error-message").text(ajax_object.wrong_format);
             $("p#error-message").show();
@@ -82,6 +83,6 @@ jQuery(document).ready(function($){
     });
 
     $("button#remove-card").click(function() {
-        resetCard();
+        resetCard(1);
     });
 });
