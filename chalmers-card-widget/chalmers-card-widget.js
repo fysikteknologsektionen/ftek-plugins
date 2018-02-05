@@ -22,11 +22,11 @@ function fetchCardData($) {
         $.ajax({
             url: "https://ftek.se/api/card-balance/v1/" + cardNumber,
             success: function(cardData){
-                fillCardData(cardData);
+                fillCardData($,cardData);
             },
             timeout: 3000,
             error: function(e) {
-                resetCard(0);
+                resetCard($,0);
                 $("div#card-message").show();
                 if ("responseJSON" in e) { 
                     $("p#error-message").text(e.responseJSON.error);
@@ -39,14 +39,14 @@ function fetchCardData($) {
     });
 }
 
-function fillCardData(cardData) {
+function fillCardData($,cardData) {
     $("div#card-message").hide();
     $("#card-holder").text(cardData.cardHolder);
     $("#card-balance").text(cardData.cardBalance.value + " " + ajax_object.currency + " ");
     $("div#card-info").show();
 }
 
-function resetCard(removeCookie) {
+function resetCard($,removeCookie) {
     if (removeCookie)
         setCookie('chalmers-card', "", -30 * 6); // Remove cookie by settings negative time
     $("p#error-message").text("");
@@ -74,7 +74,7 @@ jQuery(document).ready(function($){
                 fetchCardData($);
             });
         } else {
-            resetCard(1);
+            resetCard($,1);
             $("div#card-message").show();
             $("p#error-message").text(ajax_object.wrong_format);
             $("p#error-message").show();
@@ -83,6 +83,6 @@ jQuery(document).ready(function($){
     });
 
     $("button#remove-card").click(function() {
-        resetCard(1);
+        resetCard($,1);
     });
 });
