@@ -59,10 +59,6 @@ function ftek_uf_manage_users_custom_column( $output, $column_name, $user_id ) {
 add_action( 'show_user_profile', 'user_meta_show_form_field_class' );
 add_action( 'edit_user_profile', 'user_meta_show_form_field_class' ); // Show class for administrators
 function user_meta_show_form_field_class( $user ) {
-    // Only show for members
-    if ( !in_array( 'Sektionsmedlem', (array) $user->roles ) ) { 
-        return false;
-    }
     $class = get_user_meta($user->ID, 'class' , true);
     if (!empty($class)) {
         $program = strrev(substr(strrev($class),2));
