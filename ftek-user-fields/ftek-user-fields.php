@@ -59,35 +59,37 @@ function ftek_uf_manage_users_custom_column( $output, $column_name, $user_id ) {
 add_action( 'show_user_profile', 'user_meta_show_form_field_class' );
 add_action( 'edit_user_profile', 'user_meta_show_form_field_class' ); // Show class for administrators
 function user_meta_show_form_field_class( $user ) {
-    
-    $class = get_user_meta($user->ID, 'class' , true);
-    if (!empty($class)) {
-        $program = strrev(substr(strrev($class),2));
-        $year = substr($class,-2);
-    } else {
-        $program = "";
-        $year = "";
+    // Only show for members
+    if ( in_array( 'Sektionsmedlem', (array) $user->roles ) ) {
+        $class = get_user_meta($user->ID, 'class' , true);
+        if (!empty($class)) {
+            $program = strrev(substr(strrev($class),2));
+            $year = substr($class,-2);
+        } else {
+            $program = "";
+            $year = "";
+        }
+        ?>
+        <script>
+             jQuery(document).ready(function ($) {
+                 $("tr.user-description-wrap").before('\
+                    <tr class="user-class">\
+                        <th><label for="year">Årskurs</label></th>\
+                        <td>\
+                            <select class="program" name="program" title="Program">\
+                                <option <?= $program ? "" : "selected" ?> disabled hidden value="">F/TM</option>\
+                                <option <?= $program === "f" ? "selected" : "" ?> value="f">F</option>\
+                                <option <?= $program === "tm" ? "selected" : "" ?> value="tm">TM</option>\
+                            </select>\
+                            <input name="year" title="Terminsstart" type="number" pattern="[0-9]{2}" placeholder="YY" value="<?= $year ?>">\
+                            <p class="description">Här kan du välja årskurs för att skräddarsy hemsidan och den mejl du får. Ytterligare mejlinställningar går att hitta via länken längst ner i något av våra utskick.</p>\
+                        </td>\
+                    </tr>\
+                 ');
+             });
+        </script>
+    <?php 
     }
-    ?>
-    <script>
-         jQuery(document).ready(function ($) {
-             $("tr.user-description-wrap").before('\
-                <tr class="user-class">\
-                    <th><label for="year">Årskurs</label></th>\
-                    <td>\
-                        <select class="program" name="program" title="Program">\
-                            <option <?= $program ? "" : "selected" ?> disabled hidden value="">F/TM</option>\
-                            <option <?= $program === "f" ? "selected" : "" ?> value="f">F</option>\
-                            <option <?= $program === "tm" ? "selected" : "" ?> value="tm">TM</option>\
-                        </select>\
-                        <input name="year" title="Terminsstart" type="number" pattern="[0-9]{2}" placeholder="YY" value="<?= $year ?>">\
-                        <p class="description">Här kan du välja årskurs för att skräddarsy hemsidan och den mejl du får. Ytterligare mejlinställningar går att hitta via länken längst ner i något av våra utskick.</p>\
-                    </td>\
-                </tr>\
-             ');
-         });
-    </script>
-<?php 
 }
 
 
