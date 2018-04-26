@@ -75,13 +75,13 @@ function user_meta_show_form_field_class( $user ) {
                 <tr class="user-class">\
                     <th><label for="year">Årskurs</label></th>\
                     <td>\
-                        <select class="program" name="program">\
-                            <option <?= $program ? "" : "selected" ?> disabled hidden value="">Program</option>\
+                        <select class="program" name="program" title="Program">\
+                            <option <?= $program ? "" : "selected" ?> disabled hidden value="">F/TM</option>\
                             <option <?= $program === "f" ? "selected" : "" ?> value="f">F</option>\
                             <option <?= $program === "tm" ? "selected" : "" ?> value="tm">TM</option>\
                         </select>\
-                        <input name="year" type="number" pattern="[0-9]{2}" placeholder="YY" value="<?= $year ?>">\
-                        <p class="description">Här kan du välja klass för att skräddarsy hemsidan och den mejl du får. Ytterligare mejlinställningar går att hitta via länken längst ner i något av våra utskick.</p>\
+                        <input name="year" title="Terminsstart" type="number" pattern="[0-9]{2}" placeholder="YY" value="<?= $year ?>">\
+                        <p class="description">Här kan du välja årskurs för att skräddarsy hemsidan och den mejl du får. Ytterligare mejlinställningar går att hitta via länken längst ner i något av våra utskick.</p>\
                     </td>\
                 </tr>\
              ');
