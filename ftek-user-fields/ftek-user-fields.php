@@ -79,7 +79,7 @@ function user_meta_show_form_field_class( $user ) {
                             <option <?= $program === "f" ? "selected" : "" ?> value="f">F</option>\
                             <option <?= $program === "tm" ? "selected" : "" ?> value="tm">TM</option>\
                         </select>\
-                        <input name="year" title="Terminsstart" type="number" pattern="[0-9]{2}" placeholder="YY" value="<?= $year ?>">\
+                        <input name="year" id="year" title="Terminsstart" type="number" pattern="[0-9]{2}" placeholder="YY" value="<?= $year ?>">\
                         <p class="description">Här kan du välja årskurs för att skräddarsy hemsidan och den mejl du får. Ytterligare mejlinställningar går att hitta via länken längst ner i något av våra utskick.</p>\
                     </td>\
                 </tr>\
