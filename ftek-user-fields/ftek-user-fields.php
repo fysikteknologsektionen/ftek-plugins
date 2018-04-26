@@ -63,7 +63,7 @@ function user_meta_show_form_field_class( $user ) {
     $class = get_user_meta($user->ID, 'class' , true);
     if (!empty($class)) {
         $program = strrev(substr(strrev($class),2));
-        $year = substr($class,2);
+        $year = substr($class,-2);
     } else {
         $program = "";
         $year = "";
