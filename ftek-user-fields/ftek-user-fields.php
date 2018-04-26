@@ -76,11 +76,11 @@ function user_meta_show_form_field_class( $user ) {
                     <th><label for="year">Årskurs</label></th>\
                     <td>\
                         <select class="program" name="program">\
-                            <option <?= echo($program ? "" : "selected") ?> disabled hidden value="">Program</option>\
-                            <option <?= echo($program === "f" ? "selected" : "") ?> value="f">F</option>\
-                            <option <?= echo($program === "tm" ? "selected" : "") ?> value="tm">TM</option>\
+                            <option <?= $program ? "" : "selected" ?> disabled hidden value="">Program</option>\
+                            <option <?= $program === "f" ? "selected" : "" ?> value="f">F</option>\
+                            <option <?= $program === "tm" ? "selected" : "" ?> value="tm">TM</option>\
                         </select>\
-                        <input name="year" type="number" pattern="[0-9]{2}" placeholder="YY" value="<?= echo $year ?>">\
+                        <input name="year" type="number" pattern="[0-9]{2}" placeholder="YY" value="<?= $year ?>">\
                         <p class="description">Här kan du välja klass för att skräddarsy hemsidan och den mejl du får. Ytterligare mejlinställningar går att hitta via länken längst ner i något av våra utskick.</p>\
                     </td>\
                 </tr>\
