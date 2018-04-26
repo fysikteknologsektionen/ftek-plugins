@@ -16,6 +16,10 @@ defined( 'ABSPATH' ) or exit;
 add_filter( 'mailchimp_sync_subscriber_data', function( $subscriber, $user ) {
     $api_key = get_option('mc4wp')['api_key']; // Get API key from Mailchimp for Wordpress plugin
     $dc = substr($api_key, -4); // Extract server from last 4 characters
+    
+    /* List ID (83df300634) and interest category ID (620b9026f5) needs to be changed
+       if the Mailchimp list is deleted, this however should not be done at any time
+    */
     $api_url = 'https://' .$dc. '.api.mailchimp.com/3.0/lists/83df300634/interest-categories/620b9026f5/interests?count=50';
     
     // Extract Mailchimp groups from API
