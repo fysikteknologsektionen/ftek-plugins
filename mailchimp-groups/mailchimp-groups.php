@@ -2,7 +2,7 @@
 /*
 Plugin Name: MailChimp Sync Groups
 Description: Sync class groups with wordpress metadata
-Version: 4.2.1
+Version: 1.0.0
 Author: johwin
 Text Domain: mailchimp-groups
 Domain Path: /languages

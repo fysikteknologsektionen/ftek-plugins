@@ -86,3 +86,26 @@ function modified_qtrans_excludeUntranslatedPosts($where) {
     }
 	return $where;
 }
+
+// Make slug equal to course code
+add_action( 'save_post', 'ftek_course_code_slug_save' );
+
+function ftek_course_code_slug_save( $post_id ) {
+    $course_code = course_code($post_id);
+    // verify post is not a revision and course code is present
+    if ( ! wp_is_post_revision( $post_id ) && $course_code) {
+
+        // unhook this function to prevent infinite looping
+        remove_action( 'save_post', 'ftek_course_code_slug_save' );
+
+        // update the post slug
+        wp_update_post( array(
+            'ID' => $post_id,
+            'post_name' => $course_code
+        ));
+
+        // re-hook this function
+        add_action( 'save_post', 'ftek_course_code_slug_save' );
+
+    }
+}

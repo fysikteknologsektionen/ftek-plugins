@@ -59,7 +59,7 @@ function course_credit($ID = NULL)
         return;
     }
     $no_comma_credit = str_replace(',', '.', $credit);
-    return floatval($no_comma_credit) . 'hp';
+    return floatval($no_comma_credit) . ' ' . __('credits', 'ftekcp');
 }
 
 function course_pingpong($ID = NULL)
@@ -137,20 +137,22 @@ function course_pretty_links($ID = NULL)
     $pingpong_url = course_pingpong($ID);
     $evaluation_url = course_evaluation($ID);
     $outcomes_url = course_outcomes($ID);
+    $statistics_url = 'http://tenta.bowald.se/#/search/statistics/' . course_code($ID) . '/chart';
     
-    if ( ! ($website_url or $pingpong_url) ) {
+    if ( ! ($website_url || $pingpong_url || $evaluation_url || $outcomes_url) ) {
         return;
     }
     $result = '<ul>';
     $links = array(
-        __('Course website', 'ftekcp') => $website_url,
-        'PingPong' => $pingpong_url,
-        __('Course evaluation', 'ftekcp') => $evaluation_url,
-        __('Intended course outcomes', 'ftekcp') => $outcomes_url,
-                   );
-    foreach ($links as $name => $url) {
-        if ($url) {
-            $result .= "<li><a href='$url'>$name</a></li>";
+        'course-website' => array( __('Course website', 'ftekcp'), $website_url ),
+        'course-pingpong' => array( 'PingPong', $pingpong_url ),
+        'course-evaluation' => array( __('Course evaluation', 'ftekcp'), $evaluation_url ),
+        'course-outcomes' => array( __('Intended course outcomes', 'ftekcp'), $outcomes_url ),
+        'course-statistics' => array( __('Exam statistics', 'ftekcp'), $statistics_url ),
+        );
+    foreach ($links as $id => $data) {
+        if ($data[1]) {
+            $result .= "<li><a href='$data[1]' target='_blank' id='".sanitize_title($id)."'>$data[0]</a></li>";
         }
     }
     return $result . '</ul>';

@@ -30,7 +30,7 @@ class FtekCourseWidget extends WP_Widget {
         echo $args['before_widget'];
         $title = __('Courses', 'ftekcp');
         $title = apply_filters( 'widget_title', $title);
-        echo $args['before_title'] . $title . $args['after_title'];
+        echo $args['before_title'] . '<a href="/kurser" title="'.__('More courses', 'ftekcp').'">' .$title. '</a>' . $args['after_title'];
         
         // Our stuff begins
         $prefix = FTEK_COURSE_PREFIX;
@@ -76,7 +76,7 @@ class FtekCourseWidget extends WP_Widget {
         if ($course_page) {
             $url = get_permalink( $course_page->ID );
             echo "<a class='more-link more-courses-link' href='$url'>";
-            echo __('More courses &#8594;', 'ftekcp');
+            echo __('More courses', 'ftekcp') .  '&#8594;';
             echo "</a>";
         }
         echo $args['after_widget'];

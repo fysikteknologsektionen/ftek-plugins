@@ -3,160 +3,128 @@ msgstr ""
 "Project-Id-Version: ftekcp\n"
 "POT-Creation-Date: 2014-03-17 10:50+0100\n"
 "PO-Revision-Date: 2014-03-17 10:50+0100\n"
-"Last-Translator: Pontus Granström <pnutus@gmail.com>\n"
-"Language-Team: \n"
+"Last-Translator: Johan Winther <johan.winther@outlook.com>\n"
+"Language-Team: Spidera <spidera@ftek.se>\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.4\n"
-"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __;_e;_x\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/ftek_course_pages_fields.php:19
 msgid "Course info"
 msgstr "Kursinfo"
 
-#: ../src/ftek_course_pages_fields.php:26
-#: ../src/ftek_course_pages_table.php:44
 msgid "Course code"
 msgstr "Kurskod"
 
-#: ../src/ftek_course_pages_fields.php:31
 msgid "Course credit"
 msgstr "Högskolepoäng"
 
-#: ../src/ftek_course_pages_fields.php:36
+msgid "credits"
+msgstr "hp"
+
+# Links
+
 msgid "Course website url"
 msgstr "Kurshemsidans URL"
 
-#: ../src/ftek_course_pages_fields.php:42
 msgid "PingPong page url"
 msgstr "PingPong-sidans URL"
 
-#: ../src/ftek_course_pages_fields.php:47
 msgid "Course representatives"
 msgstr "Kursutvärderare"
 
-#: ../src/ftek_course_pages_fields.php:49
 msgid "Enter cids"
 msgstr "Mata in cids"
 
-#: ../src/ftek_course_pages_fields.php:53
+msgid "Study period"
+msgstr "Läsperiod"
+
 msgid "Study periods"
 msgstr "Läsperioder"
 
-#: ../src/ftek_course_pages_fields.php:64
+msgid "SP"
+msgstr "LP"
+
 msgid "Programme year"
 msgstr "Årskurs"
 
-#: ../src/ftek_course_pages_fields.php:71
 msgid "Master"
 msgstr "Master"
 
-#: ../src/ftek_course_pages_fields.php:75
 msgid "Programmes"
 msgstr "Program"
 
-#: ../src/ftek_course_pages_fields.php:84
 msgid "Course attendants"
 msgstr "Kursdeltagare"
 
-#: ../src/ftek_course_pages_fields.php:85
 msgid ""
 "Approximately how many students attend the course? Used for sorting purposes."
 msgstr ""
 "Ungefär hur många studenter läser kursen? Används för att sortera kurserna."
 
-#: ../src/ftek_course_pages_functions.php:93
 msgid "Master course"
 msgstr "Masterskurs"
 
-#: ../src/ftek_course_pages_functions.php:131
 msgid "Course website"
 msgstr "Kurshemsida"
 
-#: ../src/ftek_course_pages_functions.php:180
 msgid ""
 "There doesn't seem to be any study material for this course."
 msgstr ""
 "Det verkar inte finnas något veckoblad för den här kursen."
 
-#: ../src/ftek_course_pages_init.php:10 ../src/ftek_course_pages_init.php:12
-#: ../src/ftek_course_pages_init.php:26
 msgid "Course pages"
 msgstr "Kurssidor"
 
-#: ../src/ftek_course_pages_init.php:11
 msgid "Course page"
 msgstr "Kurssida"
 
-#: ../src/ftek_course_pages_init.php:13
 msgid "All Course Pages"
 msgstr "Alla kurssidor"
 
-#: ../src/ftek_course_pages_init.php:14
 msgid "Add New"
 msgstr "Skapa ny"
 
-#: ../src/ftek_course_pages_init.php:15
 msgid "Add New Course Page"
 msgstr "Skapa ny kurssida"
 
-#: ../src/ftek_course_pages_init.php:16
 msgid "Edit Course Page"
 msgstr "Redigera kurssida"
 
-#: ../src/ftek_course_pages_init.php:17
 msgid "New Course Page"
 msgstr "Ny kurssida"
 
-#: ../src/ftek_course_pages_init.php:18
 msgid "View Course Page"
 msgstr "Visa kurssida"
 
-#: ../src/ftek_course_pages_init.php:19
 msgid "Search Course Pages"
 msgstr "Sök kurssidor"
 
-#: ../src/ftek_course_pages_init.php:20
 msgid "No course pages found"
 msgstr "Inga kurssidor hittades"
 
-#: ../src/ftek_course_pages_init.php:21
 msgid "No course pages found in Trash"
 msgstr "Inga kurssidor hittades i papperskorgen"
 
-#: ../src/ftek_course_pages_settings.php:15
-#: ../src/ftek_course_pages_settings.php:27
 msgid "Ftek Course Pages Settings"
 msgstr "Inställningar för Fteks kurshemsidor"
 
-#: ../src/ftek_course_pages_settings.php:16
 msgid "Ftek Course Pages"
 msgstr "Ftek Kurssidor"
 
-#: ../src/ftek_course_pages_settings.php:44
 msgid "Date settings"
 msgstr "Datuminställningar"
 
-#: ../src/ftek_course_pages_settings.php:46
 msgid "Enter the <strong>end date</strong> for every study period."
 msgstr "Skriv in <strong>slutdatum</strong> för varje läsperiod."
 
-#: ../src/ftek_course_pages_settings.php:52
-#, php-format
 msgid "End date, study period %s"
 msgstr "Slutdatum, läsperiod %s"
 
-#: ../src/ftek_course_pages_settings.php:65
 msgid "Schedule settings"
 msgstr "Schemainställningar"
 
-#: ../src/ftek_course_pages_settings.php:67
 msgid ""
 "Enter the URL to the schedule for each class. The linked schedule should "
 "begin with the current week and end a year later."
@@ -164,69 +132,48 @@ msgstr ""
 "Skriv in URLen till schemat för varje klass. Det länkade schemat ska börja "
 "med nuvarande vecka och sluta ett år senare."
 
-#: ../src/ftek_course_pages_settings.php:74
-#, php-format
 msgid "Schedule URL %s"
 msgstr "Schema-URL %s"
 
-#: ../src/ftek_course_pages_settings.php:93
 msgid "Month"
 msgstr "Månad"
 
-#: ../src/ftek_course_pages_settings.php:105
 msgid "Day"
 msgstr "Dag"
 
-#: ../src/ftek_course_pages_table.php:43
 msgid "Course page on ftek.se"
 msgstr "Kurssida på ftek.se"
 
-#: ../src/ftek_course_pages_table.php:45
 msgid "Class"
 msgstr "Klass"
 
-#: ../src/ftek_course_pages_table.php:46
 msgid "Period"
 msgstr "Läsperiod"
 
-#: ../src/ftek_course_pages_table.php:47
 msgid "External links"
 msgstr "Externa länkar"
 
-#: ../src/ftek_course_pages_widget.php:15
 msgid "Ftek Course Widget"
 msgstr "Ftek Kurs-widget"
 
-#: ../src/ftek_course_pages_widget.php:17
 msgid "Shows current courses for F and TM at Chalmers University"
 msgstr "Visar aktuella kurser för F och TM på Chalmers"
 
-#: ../src/ftek_course_pages_widget.php:31
 msgid "Courses"
 msgstr "Kurser"
 
-#: ../src/ftek_course_pages_widget.php:44
 msgid "Year"
 msgstr "Årskurs"
 
-#: ../src/ftek_course_pages_widget.php:46
 msgid "Schedule"
 msgstr "Schema"
 
-#: ../src/ftek_course_pages_widget.php:79
-msgid "More courses &#8594;"
-msgstr "Fler kurser &#8594;"
+msgid "More courses"
+msgstr "Fler kurser"
 
-
-
-
-# algmyr @ Sun Jul 23 20:50:56 CEST 2017
-
-#: ../src/ftek_course_pages_fields.php:47
 msgid "Last course evaluation"
 msgstr "Senaste kursnämndsprotokoll"
 
-#: ../src/ftek_course_pages_fields.php:52
 msgid "Intended learning outcomes"
 msgstr "Lärandemål och innehåll"
 
@@ -236,22 +183,5 @@ msgstr "Kursnämndsprotokoll"
 msgid "Intended course outcomes"
 msgstr "Lärandemål och innehåll"
 
-
-
-#~ msgid "course"
-#~ msgstr "kurs"
-
-#~ msgid "Page on ftek"
-#~ msgstr "Kurssida på ftek"
-
-#~ msgid "Name and link to ftek course page"
-#~ msgstr "Namn och länk till ftek-kurssida"
-
-#~ msgid "Links"
-#~ msgstr "Länkar"
-
-#~ msgid "Study period "
-#~ msgstr "LP"
-
-#~ msgid "Study period"
-#~ msgstr "Läsperiod"
+msgid "Exam statistics"
+msgstr "Tentastatistik"

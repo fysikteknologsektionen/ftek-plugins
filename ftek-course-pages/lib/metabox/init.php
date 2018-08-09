@@ -553,7 +553,6 @@ class cmb_Meta_Box {
 					if ( $_new_id && $_new_id != $_id_old ) {
 						$updated[] = $_id_name;
 						update_metadata( $object_type, $object_id, $_id_name, $_new_id );
-
 					} elseif ( '' == $_new_id && $_id_old ) {
 						$updated[] = $_id_name;
 						delete_metadata( $object_type, $object_id, $_id_name, $old );
@@ -578,11 +577,23 @@ class cmb_Meta_Box {
 				if ( ! empty( $new ) ) {
 					foreach ( $new as $add_new ) {
 						add_metadata( $object_type, $object_id, $name, $add_new, false );
+						if ( $name === FTEK_COURSE_PREFIX . 'code' ) {
+							wp_update_post( array(
+								'ID' => $object_id,
+								'post_name' => $add_new
+							));
+						}
 					}
 				}
 			} elseif ( '' !== $new && $new != $old  ) {
 				$updated[] = $name;
 				update_metadata( $object_type, $object_id, $name, $new );
+				if ( $name === FTEK_COURSE_PREFIX . 'code' ) {
+					wp_update_post( array(
+						'ID' => $object_id,
+						'post_name' => $new
+					));
+				}
 			} elseif ( '' == $new ) {
 				$updated[] = $name;
 				delete_metadata( $object_type, $object_id, $name );
